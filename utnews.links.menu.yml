@@ -1,5 +1,0 @@
-utnews.configuration:
-  title: 'News Feature'
-  description: 'Configuration for the generalized "News article" content type and supporting components'
-  route_name: utnews.configuration
-  parent: system.admin_config_content

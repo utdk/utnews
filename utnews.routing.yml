@@ -1,7 +1,0 @@
-utnews.configuration:
-  path: '/admin/config/content/utnews'
-  defaults:
-    _form: '\Drupal\utnews\Form\UtnewsConfigurationForm'
-    _title: 'News Feature'
-  requirements:
-    _permission: 'manage utnews general configuration'
