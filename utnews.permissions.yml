@@ -1,0 +1,3 @@
+administer utnews:
+  title: 'Adminsister news configuration'
+  description: 'Allows a user to configure News settings.'
