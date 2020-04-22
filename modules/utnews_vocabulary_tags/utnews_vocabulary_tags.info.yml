@@ -1,0 +1,10 @@
+name: Vocabulary - News Tags
+description: Provides the 'Tags' vocabulary component for the 'UT News' module.
+package: UT Drupal Kit News Add-on
+
+type: module
+core: 8.x
+
+dependencies:
+  - drupal:taxonomy
+  - utnews:utnews
