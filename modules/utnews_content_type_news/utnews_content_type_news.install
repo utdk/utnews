@@ -1,0 +1,70 @@
+<?php
+
+/**
+ * @file
+ * News article content type installation file.
+ */
+
+use Drupal\pathauto\Entity\PathautoPattern;
+
+/**
+ * Implements hook_install().
+ */
+function utnews_content_type_news_install() {
+  // Add default Pathauto setting for content type.
+  _utnews_add_pathauto_pattern();
+}
+
+/**
+ * Check if a pathauto pattern has a condition for `utnews_news`.
+ */
+function _utnews_no_existing_pathauto_pattern() {
+  $no_profile_pathauto_defined = TRUE;
+  // Load all pattern configuration entities.
+  foreach (\Drupal::configFactory()->listAll('pathauto.pattern.') as $pattern_config_name) {
+    $pattern_config = \Drupal::configFactory()->getEditable($pattern_config_name);
+    if ($pattern_config->get('type') == 'canonical_entities:node') {
+      $selection_criteria = $pattern_config->get('selection_criteria');
+      foreach ($selection_criteria as $uuid => $condition) {
+        if ($condition['id'] == 'node_type') {
+          $bundles = array_keys($selection_criteria[$uuid]['bundles']);
+          if (in_array('utnews_news', $bundles)) {
+            $no_profile_pathauto_defined = FALSE;
+          }
+          break;
+        }
+      }
+    }
+  }
+  return $no_profile_pathauto_defined;
+}
+
+/**
+ * Save a pathauto pattern configuration entity.
+ */
+function _utnews_add_pathauto_pattern() {
+  $moduleHandler = \Drupal::service('module_handler');
+  if ($moduleHandler->moduleExists('pathauto')) {
+    if (_utnews_no_existing_pathauto_pattern()) {
+      $pattern = PathautoPattern::create([
+        'id' => 'utnews_news',
+        'label' => 'Pathauto : News article content type',
+        'type' => 'canonical_entities:node',
+        'pattern' => '/news/[node:title]',
+      ]);
+      $pattern->addSelectionCondition(
+        [
+          'id' => 'node_type',
+          'bundles' => [
+            'utnews_news' => 'utnews_news',
+          ],
+          'negate' => FALSE,
+          'context_mapping' => [
+            'node' => 'node',
+          ],
+        ]
+      );
+      $pattern->save();
+    }
+  }
+}
