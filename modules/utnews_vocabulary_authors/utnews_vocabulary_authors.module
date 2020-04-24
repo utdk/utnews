@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ * Contains UT News Authors module file.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_alter().
+ */
+function utnews_vocabulary_authors_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if ($form_id === 'taxonomy_term_utnews_authors_form') {
+    $form['description']['widget'][0]['#title'] = t('Author bio');
+    $form['name']['widget'][0]['value']['#title'] = t('Author full name');
+  }
+}
