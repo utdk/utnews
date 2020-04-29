@@ -1,10 +1,8 @@
 bundle: utnews
 required:
   - core.base_field_override.node.utnews_news.promote
-  - node.type.news_article
   - core.entity_form_display.node.utnews_news.default
   - core.entity_view_display.node.utnews_news.default
-  - core.entity_view_display.node.utnews_news.teaser
   - field.field.node.utnews_news.field_utnews_article_author
   - field.field.node.utnews_news.field_utnews_body
   - field.field.node.utnews_news.field_utnews_display_image

@@ -4,21 +4,23 @@ package: 'UT Drupal Kit News Add-on'
 type: module
 core: 8.x
 dependencies:
-  - 'drupal:datetime'
-  - 'drupal:field'
-  - 'drupal:link'
-  - 'drupal:media'
-  - 'drupal:media_library'
-  - 'drupal:menu_ui'
-  - 'drupal:node'
-  - 'drupal:path'
-  - 'drupal:taxonomy'
-  - 'drupal:text'
-  - 'drupal:user'
-  - 'utexas_form_elements:utexas_form_elements'
-  - 'utexas_media_types:utexas_media_types'
-  - 'utnews:utnews'
-  - 'utnews_vocabulary_authors:utnews_vocabulary_authors'
-  - 'utnews_vocabulary_categories:utnews_vocabulary_categories'
-  - 'utnews_vocabulary_tags:utnews_vocabulary_tags'
+  - breadcrumbs_visibility:breadcrumbs_visibility
+  - drupal:datetime
+  - drupal:field
+  - drupal:link
+  - drupal:media
+  - drupal:media_library
+  - drupal:menu_ui
+  - drupal:node
+  - drupal:path
+  - drupal:taxonomy
+  - drupal:text
+  - drupal:user
+  - page_title_visibility:page_title_visibility
+  - utexas:utexas_form_elements
+  - utexas:utexas_media_types
+  - utnews:utnews
+  - utnews:utnews_vocabulary_authors
+  - utnews:utnews_vocabulary_categories
+  - utnews:utnews_vocabulary_tags
 core_incompatible: false

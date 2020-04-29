@@ -13,7 +13,6 @@ dependencies:
     - node.type.utnews_news
   module:
     - datetime
-    - link
     - text
     - user
 id: node.utnews_news.default
@@ -22,81 +21,59 @@ bundle: utnews_news
 mode: default
 content:
   field_utnews_article_author:
-    weight: 108
-    label: above
+    weight: 1
+    label: hidden
     settings:
-      link: true
+      link: false
     third_party_settings: {  }
     type: entity_reference_label
     region: content
   field_utnews_body:
-    weight: 101
-    label: above
+    weight: 4
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     type: text_default
     region: content
-  field_utnews_display_image:
-    weight: 104
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    type: boolean
-    region: content
-  field_utnews_external_link:
-    weight: 102
-    label: above
-    settings:
-      trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
-    third_party_settings: {  }
-    type: link
-    region: content
   field_utnews_main_media:
-    type: entity_reference_entity_view
-    weight: 103
-    label: above
-    settings:
-      view_mode: default
-      link: false
+    type: entity_reference_entity_id
+    weight: 3
+    label: hidden
+    settings: {  }
     third_party_settings: {  }
     region: content
   field_utnews_news_categories:
-    weight: 106
-    label: above
+    weight: 5
+    label: hidden
     settings:
-      link: true
+      link: false
     third_party_settings: {  }
     type: entity_reference_label
     region: content
   field_utnews_news_tags:
-    weight: 107
-    label: above
+    weight: 6
+    label: hidden
     settings:
-      link: true
+      link: false
     third_party_settings: {  }
     type: entity_reference_label
     region: content
   field_utnews_publication_date:
-    weight: 105
-    label: above
+    weight: 2
+    label: hidden
     settings:
-      format_type: medium
       timezone_override: ''
+      date_format: 'F j, Y'
     third_party_settings: {  }
-    type: datetime_default
+    type: datetime_custom
     region: content
   links:
-    weight: 100
+    weight: 0
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden:
   display_breadcrumbs: true
   display_page_title: true
+  field_utnews_display_image: true
+  field_utnews_external_link: true
