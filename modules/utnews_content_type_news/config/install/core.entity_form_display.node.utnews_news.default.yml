@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.utnews_news.field_utnews_display_image
     - field.field.node.utnews_news.field_utnews_external_link
     - field.field.node.utnews_news.field_utnews_main_media
+    - field.field.node.utnews_news.field_utnews_metatags
     - field.field.node.utnews_news.field_utnews_news_categories
     - field.field.node.utnews_news.field_utnews_news_tags
     - field.field.node.utnews_news.field_utnews_publication_date
@@ -14,6 +15,7 @@ dependencies:
   module:
     - datetime
     - media_library
+    - metatag
     - path
     - text
     - utexas_form_elements
@@ -79,6 +81,12 @@ content:
     settings:
       media_types: {  }
     third_party_settings: {  }
+    region: content
+  field_utnews_metatags:
+    weight: 29
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_firehose
     region: content
   field_utnews_news_categories:
     weight: 26

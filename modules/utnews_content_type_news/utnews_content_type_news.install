@@ -6,6 +6,7 @@
  */
 
 use Drupal\pathauto\Entity\PathautoPattern;
+use Drupal\metatag\Entity\MetatagDefaults;
 
 /**
  * Implements hook_install().
@@ -13,6 +14,16 @@ use Drupal\pathauto\Entity\PathautoPattern;
 function utnews_content_type_news_install() {
   // Add default Pathauto setting for content type.
   _utnews_add_pathauto_pattern();
+  // Add default metatags.
+  _utnews_add_metatags();
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function utnews_content_type_news_uninstall() {
+  // Delete default metatags.
+  _utnews_delete_metatags();
 }
 
 /**
@@ -67,4 +78,42 @@ function _utnews_add_pathauto_pattern() {
       $pattern->save();
     }
   }
+}
+
+/**
+ * Set metatags for utnews_news content type.
+ */
+function _utnews_add_metatags() {
+  $modules_to_install = [
+    'metatag_twitter_cards',
+    'metatag_open_graph',
+  ];
+  foreach ($modules_to_install as $module) {
+    if (\Drupal::moduleHandler()->moduleExists($module) === FALSE) {
+      \Drupal::service('module_installer')->install([$module]);
+    }
+  }
+  $tags = [
+    'title' => '[current-page:title] | [site:name]',
+    'canonical_url' => '[current-page:url]',
+    'og_title' => '[current-page:title]',
+    'og_description' => '[node:field_utnews_body:summary]',
+    'og_image' => '[node:field_utnews_main_media:entity:field_utexas_media_image:utexas_image_style_1140w_616h]',
+    'og_url' => '[current-page:url]',
+    'twitter_cards_type' => 'summary_large_image',
+  ];
+  $metatag = MetatagDefaults::create([
+    'id' => 'node__utnews_news',
+    'label' => 'News content type metatags',
+    'tags' => $tags,
+  ]);
+  $metatag->save();
+}
+
+/**
+ * Delete metatags for utnews_news content type.
+ */
+function _utnews_delete_metatags() {
+  $metatag = MetatagDefaults::load('node__utnews_news');
+  $metatag->delete();
 }
