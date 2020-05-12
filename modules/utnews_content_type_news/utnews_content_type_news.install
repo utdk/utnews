@@ -1,0 +1,132 @@
+<?php
+
+/**
+ * @file
+ * News article content type installation file.
+ */
+
+use Drupal\pathauto\Entity\PathautoPattern;
+use Drupal\metatag\Entity\MetatagDefaults;
+
+/**
+ * Implements hook_install().
+ */
+function utnews_content_type_news_install() {
+  // Add default Pathauto setting for content type.
+  _utnews_add_pathauto_pattern();
+  // Add default metatags.
+  _utnews_add_metatags();
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function utnews_content_type_news_uninstall() {
+  // Delete default metatags.
+  _utnews_delete_metatags();
+}
+
+/**
+ * Check if a pathauto pattern has a condition for `utnews_news`.
+ */
+function _utnews_no_existing_pathauto_pattern() {
+  $no_profile_pathauto_defined = TRUE;
+  // Load all pattern configuration entities.
+  foreach (\Drupal::configFactory()->listAll('pathauto.pattern.') as $pattern_config_name) {
+    $pattern_config = \Drupal::configFactory()->getEditable($pattern_config_name);
+    if ($pattern_config->get('type') == 'canonical_entities:node') {
+      $selection_criteria = $pattern_config->get('selection_criteria');
+      foreach ($selection_criteria as $uuid => $condition) {
+        if ($condition['id'] == 'node_type') {
+          $bundles = array_keys($selection_criteria[$uuid]['bundles']);
+          if (in_array('utnews_news', $bundles)) {
+            $no_profile_pathauto_defined = FALSE;
+          }
+          break;
+        }
+      }
+    }
+  }
+  return $no_profile_pathauto_defined;
+}
+
+/**
+ * Save a pathauto pattern configuration entity.
+ */
+function _utnews_add_pathauto_pattern() {
+  $moduleHandler = \Drupal::service('module_handler');
+  if ($moduleHandler->moduleExists('pathauto')) {
+    if (_utnews_no_existing_pathauto_pattern()) {
+      $pattern = PathautoPattern::create([
+        'id' => 'utnews_news',
+        'label' => 'Pathauto : News article content type',
+        'type' => 'canonical_entities:node',
+        'pattern' => '/news/[node:title]',
+      ]);
+      $pattern->addSelectionCondition(
+        [
+          'id' => 'node_type',
+          'bundles' => [
+            'utnews_news' => 'utnews_news',
+          ],
+          'negate' => FALSE,
+          'context_mapping' => [
+            'node' => 'node',
+          ],
+        ]
+      );
+      $pattern->save();
+    }
+  }
+}
+
+/**
+ * Set metatags for utnews_news content type.
+ */
+function _utnews_add_metatags() {
+  $modules_to_install = [
+    'metatag_twitter_cards',
+    'metatag_open_graph',
+    'schema_metatag',
+    'schema_article',
+  ];
+  foreach ($modules_to_install as $module) {
+    if (\Drupal::moduleHandler()->moduleExists($module) === FALSE) {
+      \Drupal::service('module_installer')->install([$module]);
+    }
+  }
+  $tags = [
+    'title' => '[current-page:title] | [site:name]',
+    'canonical_url' => '[current-page:url]',
+    'og_title' => '[current-page:title]',
+    'og_description' => '[node:field_utnews_body:summary]',
+    'og_image' => '[node:field_utnews_main_media:entity:field_utexas_media_image:utexas_image_style_1140w_616h]',
+    'og_url' => '[current-page:url]',
+    'twitter_cards_type' => 'summary_large_image',
+    'schema_article_date_modified' => '[node:changed:html_datetime]',
+    'schema_article_type' => 'NewsArticle',
+    'schema_article_main_entity_of_page' => '[current-page:url]',
+    'schema_article_image' => 'a:4:{s:5:"@type";s:11:"ImageObject";s:3:"url";s:92:"[node:field_utnews_main_media:entity:field_utexas_media_image:utexas_image_style_1140w_616h]";s:5:"width";s:4:"1140";s:6:"height";s:3:"616";}',
+    'schema_article_headline' => '[current-page:title]',
+    'schema_article_publisher' => 'a:4:{s:5:"@type";s:12:"Organization";s:3:"@id";s:10:"[site:url]";s:4:"name";s:11:"[site:name]";s:3:"url";s:10:"[site:url]";}',
+    'schema_article_about' => '[node:field_utnews_news_categories], [node:field_utnews_news_tags]',
+    'schema_article_name' => '[current-page:title]',
+    'schema_article_description' => '[node:field_utnews_body:summary]',
+    'schema_article_date_published' => '[node:field_utnews_publication_date:date:html_datetime]',
+    'schema_article_author' => 'a:4:{s:5:"@type";s:6:"Person";s:3:"@id";s:45:"[node:field_utnews_article_author:entity:url]";s:4:"name";s:46:"[node:field_utnews_article_author:entity:name]";s:3:"url";s:45:"[node:field_utnews_article_author:entity:url]";}',
+  ];
+  $metatag = MetatagDefaults::create([
+    'id' => 'node__utnews_news',
+    'label' => 'News content type metatags',
+    'tags' => $tags,
+  ]);
+  $metatag->save();
+}
+
+/**
+ * Delete metatags for utnews_news content type.
+ */
+function _utnews_delete_metatags() {
+  $metatag = MetatagDefaults::load('node__utnews_news');
+  $metatag->delete();
+}

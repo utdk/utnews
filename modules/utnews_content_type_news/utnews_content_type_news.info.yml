@@ -1,0 +1,27 @@
+name: 'Content Type - News Articles'
+description: 'Provides the "News articles" content type for the "UT News" module.'
+package: 'UT Drupal Kit News Add-on'
+type: module
+core: 8.x
+dependencies:
+  - breadcrumbs_visibility:breadcrumbs_visibility
+  - drupal:datetime
+  - drupal:field
+  - drupal:link
+  - drupal:media
+  - drupal:media_library
+  - drupal:menu_ui
+  - drupal:metatag
+  - drupal:node
+  - drupal:path
+  - drupal:taxonomy
+  - drupal:text
+  - drupal:user
+  - page_title_visibility:page_title_visibility
+  - utexas:utexas_form_elements
+  - utexas:utexas_media_types
+  - utnews:utnews
+  - utnews:utnews_vocabulary_authors
+  - utnews:utnews_vocabulary_categories
+  - utnews:utnews_vocabulary_tags
+core_incompatible: false

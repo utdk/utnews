@@ -1,0 +1,39 @@
+<?php
+
+/**
+ * @file
+ * Contains utnews content type .module file.
+ */
+
+use Drupal\utnews_content_type_news\NewsContentTypeHelper;
+
+/**
+ * Implements hook_theme().
+ */
+function utnews_content_type_news_theme() {
+  return [
+    'node__utnews_news__full' => [
+      'template' => 'node--utnews-news--full',
+      'base hook' => 'node',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function utnews_content_type_news_preprocess_node(&$variables) {
+  $node = $variables['elements']['#node'];
+  $type = $node->getType();
+
+  if ($type !== 'utnews_news') {
+    return;
+  }
+  $variables['#attached']['library'][] = 'utnews_content_type_news/node-display';
+
+  $variables['has_sidebar_fields'] = NewsContentTypeHelper::hasSidebarFields($node);
+  $variables['author_information'] = NewsContentTypeHelper::prepareAuthorInformation($node);
+  $variables['main_image'] = NewsContentTypeHelper::prepareMainImage($node);
+  $variables['news_tags'] = NewsContentTypeHelper::prepareNewsTaxonomy($node, 'field_utnews_news_tags');
+  $variables['news_categories'] = NewsContentTypeHelper::prepareNewsTaxonomy($node, 'field_utnews_news_categories');
+}

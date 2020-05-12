@@ -1,0 +1,10 @@
+name: Vocabulary - News Categories
+description: Provides the 'News Categories' vocabulary component for the 'UT News' module.
+package: UT Drupal Kit News Add-on
+
+type: module
+core: 8.x
+
+dependencies:
+  - drupal:taxonomy
+  - utnews:utnews
