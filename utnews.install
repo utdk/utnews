@@ -12,7 +12,7 @@ function utnews_requirements($phase) {
   $requirements = [];
   if ($phase === 'install') {
     $active_profile = \Drupal::installProfile();
-    $profile_information = system_get_info('module', $active_profile);
+    $profile_information = \Drupal::service('extension.list.profile')->getExtensionInfo($active_profile);
     if ($profile_information['distribution']['name'] !== 'UTexas') {
       $requirements['install_profile']['severity'] = REQUIREMENT_ERROR;
       $requirements['install_profile']['description'] = t('The UT Drupal Kit News add-on could not be installed because it requires the UT Drupal Kit installation profile.');
