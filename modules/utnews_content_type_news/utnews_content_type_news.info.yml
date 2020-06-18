@@ -3,6 +3,7 @@ description: 'Provides the "News articles" content type for the "UT News" module
 package: 'UT Drupal Kit News Add-on'
 type: module
 core: 8.x
+core_version_requirement: ^8 || ^9
 dependencies:
   - breadcrumbs_visibility:breadcrumbs_visibility
   - drupal:datetime
