@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * @file
+ * Module file for UTNews listing page.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\utnews_view_listing_page\Form\ListingPageConfig;
+
+/**
+ * Implements hook_form_FORM_ID_alter() for the general config form.
+ */
+function utnews_view_listing_page_form_utnews_general_config_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Alter the general config form to include an the listing page title.
+  \Drupal::classResolver(ListingPageConfig::class)->alterForm($form, $form_state, $form_id);
+}

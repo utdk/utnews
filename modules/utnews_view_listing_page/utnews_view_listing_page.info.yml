@@ -1,0 +1,11 @@
+name: 'View - News Listing Page'
+description: 'Provides the "News" listing page'
+package: 'UT Drupal Kit News Add-on'
+type: module
+core: 8.x
+core_version_requirement: ^8 || ^9
+dependencies:
+  - drupal:views
+  - utnews:utnews
+  - utnews:utnews_content_type_news
+core_incompatible: false
