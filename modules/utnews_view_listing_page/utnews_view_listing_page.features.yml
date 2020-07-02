@@ -1,1 +1,3 @@
 bundle: utnews
+required:
+  - views.view.utnews_listing_page

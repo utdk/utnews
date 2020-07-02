@@ -2,8 +2,9 @@
 
 namespace Drupal\utnews_view_listing_page\Form;
 
-use Drupal\utnews\Form\UtnewsConfigurationForm;
+use Drupal\Core\Cache\Cache;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\utnews\Form\UtnewsConfigurationForm;
 
 /**
  * Supplement form UI to add setting for which blocks & layouts are available.
@@ -39,8 +40,9 @@ class ListingPageConfig extends UtnewsConfigurationForm {
       $config = $this->configFactory->getEditable('utnews_view_listing_page.config');
       $config->set('page_title', $page_title);
       $config->save();
+      // Ensure that this change invalidates the view cache.
+      Cache::invalidateTags(['config:views.view.utnews_listing_page']);
     }
-
   }
 
 }

@@ -134,14 +134,16 @@ function _utnews_delete_metatags() {
 
 /**
  * Provide weight that takes presedence over generic pattern.
- * @return string The weight of the custom pathauto pattern.
+ *
+ * @return string
+ *   The weight of the custom pathauto pattern.
  */
 function _setNewsPatternWeightBeforeGeneric() {
   // Default to -10 in case there is a generic pattern.
   $weight = -10;
   // If generic pattern present, place it 1 level above.
   if ($generic = PathautoPattern::load('pathauto_node')) {
-    $weight = (int) $generic->get('weight') -1;
+    $weight = (int) $generic->get('weight') - 1;
   }
   return (string) $weight;
 }
@@ -152,4 +154,13 @@ function _setNewsPatternWeightBeforeGeneric() {
 function utnews_content_type_news_update_8101() {
   $pattern = PathautoPattern::load('utnews_news');
   $pattern->set('weight', _setNewsPatternWeightBeforeGeneric())->save();
+}
+
+/**
+ * Import new teaser view mode display (#30).
+ */
+function utnews_content_type_news_update_8102() {
+  \Drupal::service('features.manager')->import([
+    'utnews_content_type_news',
+  ], TRUE);
 }

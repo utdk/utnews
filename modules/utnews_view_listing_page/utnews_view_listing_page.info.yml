@@ -3,9 +3,12 @@ description: 'Provides the "News" listing page'
 package: 'UT Drupal Kit News Add-on'
 type: module
 core: 8.x
-core_version_requirement: ^8 || ^9
+core_version_requirement: '^8 || ^9'
 dependencies:
-  - drupal:views
-  - utnews:utnews
-  - utnews:utnews_content_type_news
+  - 'drupal:datetime'
+  - 'drupal:views'
+  - 'drupal:user'
+  - 'drupal:views'
+  - 'utnews:utnews'
+  - 'utnews:utnews_content_type_news'
 core_incompatible: false

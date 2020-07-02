@@ -70,13 +70,6 @@ class UtnewsConfigurationForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-
-    $form['placeholder'] = [
-      '#type' => 'html_tag',
-      '#tag' => 'p',
-      '#value' => $this->t('There is no configuration available in this form.'),
-    ];
-
     return parent::buildForm($form, $form_state);
   }
 
