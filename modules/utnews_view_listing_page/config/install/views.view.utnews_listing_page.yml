@@ -73,7 +73,7 @@ display:
         options:
           uses_fields: false
           columns: 1
-          automatic_width: true
+          automatic_width: false
           alignment: vertical
           col_class_default: false
           col_class_custom: ''

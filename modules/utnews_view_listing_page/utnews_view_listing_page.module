@@ -10,6 +10,18 @@ use Drupal\utnews_view_listing_page\Form\ListingPageConfig;
 use Drupal\views\ViewExecutable;
 
 /**
+ * Implements hook_theme().
+ */
+function utnews_view_listing_page_theme() {
+  // Provide News listing-specific page template.
+  $theme['page__news'] = [
+    'template' => 'page--news',
+  ];
+
+  return $theme;
+}
+
+/**
  * Implements hook_form_FORM_ID_alter() for the general config form.
  */
 function utnews_view_listing_page_form_utnews_general_config_alter(&$form, FormStateInterface $form_state, $form_id) {

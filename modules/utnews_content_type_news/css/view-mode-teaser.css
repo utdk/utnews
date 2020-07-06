@@ -1,0 +1,10 @@
+/* UTNEWS teaser view mode styling. */
+/* Mobile styling. */
+.utnews__published {
+  font-style: italic;
+  font-size: 14px;
+}
+
+.teaser.utnews-news {
+  padding: 0 0 1.5rem 0;
+}

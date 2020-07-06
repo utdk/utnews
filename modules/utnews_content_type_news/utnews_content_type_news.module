@@ -16,6 +16,10 @@ function utnews_content_type_news_theme() {
       'template' => 'node--utnews-news--full',
       'base hook' => 'node',
     ],
+    'node__utnews_news__teaser' => [
+      'template' => 'node--utnews-news--teaser',
+      'base hook' => 'node',
+    ],
   ];
 }
 
@@ -25,15 +29,27 @@ function utnews_content_type_news_theme() {
 function utnews_content_type_news_preprocess_node(&$variables) {
   $node = $variables['elements']['#node'];
   $type = $node->getType();
+  $view_mode = $variables['view_mode'];
 
   if ($type !== 'utnews_news') {
     return;
   }
-  $variables['#attached']['library'][] = 'utnews_content_type_news/node-display';
 
   $variables['has_sidebar_fields'] = NewsContentTypeHelper::hasSidebarFields($node);
   $variables['author_information'] = NewsContentTypeHelper::prepareAuthorInformation($node);
   $variables['main_image'] = NewsContentTypeHelper::prepareMainImage($node);
   $variables['news_tags'] = NewsContentTypeHelper::prepareNewsTaxonomy($node, 'field_utnews_news_tags');
   $variables['news_categories'] = NewsContentTypeHelper::prepareNewsTaxonomy($node, 'field_utnews_news_categories');
+  $variables['linked_title'] = NewsContentTypeHelper::prepareLinkedTitle($node);
+  $variables['body_summary'] = $node->get('field_utnews_body')->getValue()[0]['summary'];
+
+  switch ($view_mode) {
+    case 'full':
+      $variables['#attached']['library'][] = 'utnews_content_type_news/node-display';
+      break;
+
+    case 'teaser':
+      $variables['#attached']['library'][] = 'utnews_content_type_news/view-mode-teaser';
+      break;
+  }
 }
