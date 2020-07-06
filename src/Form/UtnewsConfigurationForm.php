@@ -15,6 +15,13 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class UtnewsConfigurationForm extends ConfigFormBase {
 
   /**
+   * The Config Factory.
+   *
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   */
+  protected $configFactory;
+
+  /**
    * The EntityTypeManager.
    *
    * @var \Drupal\Core\Entity\EntityTypeManager
@@ -32,6 +39,7 @@ class UtnewsConfigurationForm extends ConfigFormBase {
   public function __construct(ConfigFactoryInterface $config_factory, EntityTypeManager $entity_type_manager) {
     parent::__construct($config_factory);
     $this->entityTypeManager = $entity_type_manager;
+    $this->configFactory = $config_factory;
   }
 
   /**
@@ -62,13 +70,6 @@ class UtnewsConfigurationForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-
-    $form['placeholder'] = [
-      '#type' => 'html_tag',
-      '#tag' => 'p',
-      '#value' => $this->t('There is no configuration available in this form.'),
-    ];
-
     return parent::buildForm($form, $form_state);
   }
 

@@ -4,6 +4,9 @@ namespace Drupal\utnews_content_type_news;
 
 use Drupal\node\Entity\Node;
 use Drupal\taxonomy\Entity\Term;
+use Drupal\Core\Url;
+use Drupal\Core\Link;
+use Drupal\utexas_form_elements\UtexasLinkOptionsHelper;
 
 /**
  * Business logic for rendering the content type.
@@ -146,6 +149,27 @@ class NewsContentTypeHelper {
       ]);
       return $image_render_array;
     }
+  }
+
+  /**
+   * Provide a link Title field.
+   *
+   * @param Drupal\node\Entity\Node $node
+   *   The node object.
+   *
+   * @return Drupal\Core\Link
+   *   A link object to points to either the node or external URL.
+   */
+  public static function prepareLinkedTitle(Node $node) {
+    $link_field = 'field_utnews_external_link';
+    // Use external link instead of node uri if present.
+    if ($node->hasField($link_field) && !$node->get($link_field)->isEmpty()) {
+      $link_object = [
+        'link' => $node->get($link_field)->getValue()[0],
+      ];
+      return UtexasLinkOptionsHelper::buildLink($link_object, [], $node->getTitle());
+    }
+    return $node->toLink();
   }
 
 }
