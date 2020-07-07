@@ -82,86 +82,17 @@
     'clearfix',
   ]
 %}
-<article{{ attributes.addClass(classes) }}>
-  <div class="utnews__top-row">
-    {% if author_information %}
-      <div class="utnews__author-wrapper">
-        <span class="field__label">By: </span>
-        <span class="utnews__author">{{ author_information.name }}</span>
-      </div>
-    {% endif %}
 
-    {% if content.field_utnews_publication_date %}
-      <div class="utnews__pulbished-wrapper">
-        <span class="field__label">Published: </span>
-        <span class="utnews__published">{{ content.field_utnews_publication_date }}</span>
-      </div>
-    {% endif %}
-  </div>
-
-  {% if has_sidebar_fields %}
-    <div class="utnews__wrapper">
-  {% else %}
-    <div class="utnews__wrapper-no-sidebar">
-  {% endif %}
-    <div class="utnews__left-col">
-      {% if main_image %}
-        <div class="utnews__image-wrapper">
-          {{ main_image }}
-        </div>
-      {% endif %}
-
-      {% if content.field_utnews_body %}
-        <div class="utnews__body-wrapper">
-          {{ content.field_utnews_body }}
-        </div>
-      {% endif %}
+<div{{ attributes.addClass(classes) }}>
+{% if linked_title %}
+    <h3 class="ut-headline">{{ linked_title }}</h3>
+{% endif %}
+{% if content.field_utnews_publication_date %}
+    <span class="utnews__published">{{ content.field_utnews_publication_date }}</span>
+{% endif %}
+{% if body_summary %}
+    <div class="ut-copy">
+        {{ body_summary }}
     </div>
-
-    {% if author_information %}
-      <div class="utnews__author-information-wrapper">
-        {% if author_information.image %}
-          <div class="utnews__image">{{ author_information.image }}</div>
-        {% endif %}
-
-        {% if author_information.name or author_information.description %}
-          <div class="data-wrapper">
-            {% if author_information.name %}
-              <h3 class="ut-headline">About {{ author_information.name }}</h3>
-            {% endif %}
-
-            {% if author_information.description %}
-              <div class="utnews__description-wrapper">{{ author_information.description }}</div>
-            {% endif %}
-          </div>
-        {% endif %}
-      </div>
-    {% endif %}
-
-    {% if has_sidebar_fields %}
-      <div class="utnews__right-col">
-        {% if news_categories %}
-          <div class="utnews__categories-wrapper">
-            <h5 class="field__label">News category: </h5>
-            <span class="utnews__categories">
-              {% for category in news_categories %}
-                {{ category }}
-              {% endfor %}
-            </span>
-          </div>
-        {% endif %}
-
-        {% if news_tags %}
-          <div class="utnews__tags-wrapper">
-            <h5 class="field__label">News tags: </h5>
-            <span class="utnews__tags">
-              {% for tag in news_tags %}
-                <span class="utnews__tag">{{ tag }}</span>
-              {% endfor %}
-            </span>
-          </div>
-        {% endif %}
-      </div>
-    {% endif %}
-  </div>
-</article>
+{% endif %}
+</div>

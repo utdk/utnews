@@ -62,6 +62,7 @@ function _utnews_add_pathauto_pattern() {
         'label' => 'Pathauto : News article content type',
         'type' => 'canonical_entities:node',
         'pattern' => '/news/[node:title]',
+        'weight' => _setNewsPatternWeightBeforeGeneric(),
       ]);
       $pattern->addSelectionCondition(
         [
@@ -129,4 +130,37 @@ function _utnews_add_metatags() {
 function _utnews_delete_metatags() {
   $metatag = MetatagDefaults::load('node__utnews_news');
   $metatag->delete();
+}
+
+/**
+ * Provide weight that takes presedence over generic pattern.
+ *
+ * @return string
+ *   The weight of the custom pathauto pattern.
+ */
+function _setNewsPatternWeightBeforeGeneric() {
+  // Default to -10 in case there is a generic pattern.
+  $weight = -10;
+  // If generic pattern present, place it 1 level above.
+  if ($generic = PathautoPattern::load('pathauto_node')) {
+    $weight = (int) $generic->get('weight') - 1;
+  }
+  return (string) $weight;
+}
+
+/**
+ * Have news pattern above fallback content pattern.
+ */
+function utnews_content_type_news_update_8101() {
+  $pattern = PathautoPattern::load('utnews_news');
+  $pattern->set('weight', _setNewsPatternWeightBeforeGeneric())->save();
+}
+
+/**
+ * Import new teaser view mode display (#30).
+ */
+function utnews_content_type_news_update_8102() {
+  \Drupal::service('features.manager')->import([
+    'utnews_content_type_news',
+  ], TRUE);
 }
