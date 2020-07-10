@@ -16,6 +16,7 @@ function utnews_view_listing_page_theme() {
   // Provide News listing-specific page template.
   $theme['page__news'] = [
     'template' => 'page--news',
+    'base hook' => 'page',
   ];
 
   return $theme;
