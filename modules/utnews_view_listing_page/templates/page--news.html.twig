@@ -56,6 +56,17 @@
 
 <div class="container">
   <div class="row">
+    <div class="col-md-4">
+      <aside class="layout-sidebar-first" role="complementary">
+        {# The key contains the name of the facet #}
+        {% for key, facet in facet_blocks %}
+            <div id="block-{{key}}" class="contextual-region block-facet--checkbox utexas-field-border utexas-field-background block block-facets">
+              <h2>{{facet.label}}</h2>
+              {{ facet.block }}
+            </div>
+        {% endfor %}
+      </aside>
+    </div>
     <div class="col-md-8">
       <main role="main">
         <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
@@ -64,12 +75,6 @@
         </div>{# /.layout-content #}
       </main>
     </div>
-    <div class="col-md-4">
-      <aside class="layout-sidebar-second" role="complementary">
-        {{ page.sidebar_second }}
-      </aside>
-    </div>
-  </div>
   </div>
 </div>
 {% include '@forty_acres/includes/footer.html.twig' %}

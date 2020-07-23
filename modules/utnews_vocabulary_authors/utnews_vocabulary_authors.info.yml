@@ -3,13 +3,13 @@ description: 'Provides the ''News authors'' vocabulary component for the ''UT Ne
 package: 'UT Drupal Kit News Add-on'
 type: module
 core: 8.x
-core_version_requirement: ^8 || ^9
+core_version_requirement: '^8 || ^9'
 dependencies:
-  - 'drupal:taxonomy'
   - 'drupal:field'
   - 'drupal:media'
   - 'drupal:media_library'
   - 'drupal:path'
+  - 'drupal:taxonomy'
   - 'drupal:text'
   - 'utexas_media_types:utexas_media_types'
   - 'utnews:utnews'

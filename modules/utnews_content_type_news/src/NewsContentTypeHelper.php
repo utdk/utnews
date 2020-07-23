@@ -172,4 +172,68 @@ class NewsContentTypeHelper {
     return $node->toLink();
   }
 
+  /**
+   * Inserts a new key/value after the key in the array.
+   *
+   * @todo Consider moving to the kernel when required someplace else.
+   *
+   * @param string $key
+   *   The key to insert after.
+   * @param array $array
+   *   An array to insert in to.
+   * @param string $new_key
+   *   The key to insert.
+   * @param string $new_value
+   *   An value to insert.
+   *
+   * @return array
+   *   The new array if the key exists, the old array otherwise.
+   */
+  public static function arrayInsertAfter($key, array &$array, $new_key, $new_value) {
+    if (array_key_exists($key, $array)) {
+      $new = [];
+      foreach ($array as $k => $value) {
+        $new[$k] = $value;
+        if ($k === $key) {
+          $new[$new_key] = $new_value;
+        }
+      }
+      return $new;
+    }
+    return $array;
+  }
+
+  /**
+   * Inserts a new key/value before the key in the array.
+   *
+   * @todo Consider moving to the kernel when required someplace else.
+   *
+   * @param string $key
+   *   The key to insert before.
+   * @param array $array
+   *   An array to insert in to.
+   * @param string $new_key
+   *   The key to insert.
+   * @param string $new_value
+   *   An value to insert.
+   *
+   * @return array
+   *   The new array if the key exists, the old array otherwise.
+   *
+   * @see array_insert_after()
+   */
+  public static function arrayInsertBefore($key, array &$array, $new_key, $new_value) {
+    if (array_key_exists($key, $array)) {
+      $new = [];
+      foreach ($array as $k => $value) {
+        if ($k === $key) {
+          $new[$new_key] = $new_value;
+        }
+        $new[$k] = $value;
+      }
+      return $new;
+    }
+    return $array;
+  }
+
 }

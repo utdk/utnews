@@ -1,0 +1,36 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - search_api.index.utnews
+    - views.view.utnews_listing_page
+  module:
+    - search_api
+id: utnews
+name: UTNews
+facets:
+  author:
+    checked: true
+    label: Author
+    separator: ', '
+    weight: 0
+    show_count: false
+  categories:
+    checked: true
+    label: Categories
+    separator: ', '
+    weight: 0
+    show_count: false
+  tags:
+    checked: true
+    label: Tags
+    separator: ', '
+    weight: 0
+    show_count: false
+facet_source_id: 'search_api:views_page__utnews_listing_page__page_1'
+processor_configs:
+  hide_when_not_rendered:
+    processor_id: hide_when_not_rendered
+    weights:
+      build: '45'
+    settings: {  }
