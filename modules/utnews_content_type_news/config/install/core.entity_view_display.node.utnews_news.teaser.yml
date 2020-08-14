@@ -7,15 +7,18 @@ dependencies:
     - field.field.node.utnews_news.field_utnews_body
     - field.field.node.utnews_news.field_utnews_display_image
     - field.field.node.utnews_news.field_utnews_external_link
+    - field.field.node.utnews_news.field_utnews_featured
     - field.field.node.utnews_news.field_utnews_main_media
     - field.field.node.utnews_news.field_utnews_metatags
     - field.field.node.utnews_news.field_utnews_news_categories
     - field.field.node.utnews_news.field_utnews_news_tags
     - field.field.node.utnews_news.field_utnews_publication_date
+    - image.style.utexas_image_style_280w_280h
     - node.type.utnews_news
   module:
     - date_ap_style
     - layout_builder
+    - media
     - text
     - user
 third_party_settings:
@@ -28,13 +31,22 @@ bundle: utnews_news
 mode: teaser
 content:
   field_utnews_body:
-    weight: 1
+    weight: 2
     label: hidden
     settings:
       trim_length: 600
     third_party_settings: {  }
     type: text_summary_or_trimmed
     region: content
+  field_utnews_main_media:
+    type: media_thumbnail
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      image_style: utexas_image_style_280w_280h
+      image_link: ''
+    third_party_settings: {  }
   field_utnews_publication_date:
     weight: 0
     label: hidden
@@ -58,7 +70,7 @@ hidden:
   field_utnews_article_author: true
   field_utnews_display_image: true
   field_utnews_external_link: true
-  field_utnews_main_media: true
+  field_utnews_featured: true
   field_utnews_metatags: true
   field_utnews_news_categories: true
   field_utnews_news_tags: true

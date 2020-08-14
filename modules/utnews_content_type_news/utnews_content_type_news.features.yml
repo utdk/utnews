@@ -21,3 +21,4 @@ required:
   - field.storage.node.field_utnews_news_tags
   - field.storage.node.field_utnews_publication_date
   - field.storage.node.field_utnews_metatags
+  - field.storage.node.field_utnews_featured

@@ -43,6 +43,20 @@ function utnews_content_type_news_preprocess_node(&$variables) {
   $variables['linked_title'] = NewsContentTypeHelper::prepareLinkedTitle($node);
   $variables['body_summary'] = $node->get('field_utnews_body')->getValue()[0]['summary'];
 
+  // The Views field handler `NewsListing` can be applied to all view modes and
+  // allows for optionally suppressing 3 fields, listed below, based on
+  // the settings values indicated.
+  $dynamic_display = [
+    '#display_date' => 'field_utnews_publication_date',
+    '#display_summary' => 'field_utnews_body',
+    '#display_thumbnail' => 'field_utnews_main_media',
+  ];
+  foreach ($dynamic_display as $setting => $field) {
+    if (isset($variables['elements'][$setting]) && $variables['elements'][$setting] === FALSE) {
+      unset($variables['content'][$field]);
+    }
+  }
+
   switch ($view_mode) {
     case 'full':
       $variables['#attached']['library'][] = 'utnews_content_type_news/node-display';

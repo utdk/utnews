@@ -4,8 +4,6 @@ namespace Drupal\utnews_content_type_news;
 
 use Drupal\node\Entity\Node;
 use Drupal\taxonomy\Entity\Term;
-use Drupal\Core\Url;
-use Drupal\Core\Link;
 use Drupal\utexas_form_elements\UtexasLinkOptionsHelper;
 
 /**
@@ -80,8 +78,9 @@ class NewsContentTypeHelper {
     }
     $values = $node->get($field)->getValue();
     foreach ($values as $value) {
-      $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($value['target_id']);
-      $output[] = $term->getName();
+      if ($term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($value['target_id'])) {
+        $output[] = $term->getName();
+      }
     }
     return $output;
   }
