@@ -13,7 +13,7 @@ dependencies:
     - field.field.node.utnews_news.field_utnews_news_categories
     - field.field.node.utnews_news.field_utnews_news_tags
     - field.field.node.utnews_news.field_utnews_publication_date
-    - image.style.utexas_image_style_280w_280h
+    - image.style.utexas_image_style_280w_152h
     - node.type.utnews_news
   module:
     - date_ap_style
@@ -44,7 +44,7 @@ content:
     region: content
     label: hidden
     settings:
-      image_style: utexas_image_style_280w_280h
+      image_style: utexas_image_style_280w_152h
       image_link: ''
     third_party_settings: {  }
   field_utnews_publication_date:
