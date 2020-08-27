@@ -90,3 +90,15 @@ function utnews_view_listing_page_preprocess_page__news(&$variables) {
   // Prepend facet_summary before the main_content block in page.content array.
   $variables['page']['content'] = NewsContentTypeHelper::arrayInsertBefore('main_page_content', $variables['page']['content'], 'summary_facet', $summary_facet);
 }
+
+/**
+ * Implements hook_plugin_filter_TYPE__CONSUMER_alter().
+ */
+function utnews_view_listing_page_plugin_filter_block__layout_builder_alter(array &$definitions) {
+  // News facets are not designed to be placed with Layout Builder.
+  // Suppress them from that context.
+  unset($definitions['facet_block:author']);
+  unset($definitions['facet_block:categories']);
+  unset($definitions['facet_block:tags']);
+  unset($definitions['facets_summary_block:utnews']);
+}
