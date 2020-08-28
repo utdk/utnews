@@ -25,10 +25,10 @@ class DemoContent {
     $module_handler = \Drupal::service('module_handler');
     $module_path = $module_handler->getModule('utnews_demo_content')->getPath();
     $image_metadata = [
-      'filepath' => $module_path . '/assets/gates_dell_complex.jpg',
-      'filename' => 'Gates-Dell Complex',
-      'alt_text' => 'Picture of the Gates-Dell Complex at The University of Texas at Austin',
-      'title_text' => 'Picture of the Gates-Dell Complex at The University of Texas at Austin',
+      'filepath' => $module_path . '/assets/tower-lighting.gif',
+      'filename' => 'Tower lighting',
+      'alt_text' => 'Animated gif of the UT Tower',
+      'title_text' => 'Animated gif of the UT Tower',
     ];
     $media_id = self::createMediaItem($image_metadata);
     foreach (array_values(DemoData::loadData()) as $item) {
@@ -123,10 +123,10 @@ class DemoContent {
     $module_handler = \Drupal::service('module_handler');
     $module_path = $module_handler->getModule('utnews_demo_content')->getPath();
     $image_metadata = [
-      'filepath' => $module_path . '/assets/jupiter.jpg',
-      'filename' => 'Cornelia Africana',
-      'alt_text' => 'The face of Cornelia Africana',
-      'title_text' => 'The face of Cornelia Africana',
+      'filepath' => $module_path . '/assets/generic-headshot.png',
+      'filename' => 'Generic headshot',
+      'alt_text' => 'Generic avatar image',
+      'title_text' => 'Generic avatar image',
     ];
     $media_id = self::createMediaItem($image_metadata);
     foreach ($news_author as $term) {
