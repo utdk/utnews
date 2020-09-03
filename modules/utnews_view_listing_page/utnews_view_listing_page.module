@@ -8,6 +8,7 @@
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\utnews_view_listing_page\Form\ListingPageConfig;
 use Drupal\views\ViewExecutable;
+use Drupal\utnews_content_type_news\NewsContentTypeHelper;
 
 /**
  * Implements hook_theme().
@@ -16,6 +17,7 @@ function utnews_view_listing_page_theme() {
   // Provide News listing-specific page template.
   $theme['page__news'] = [
     'template' => 'page--news',
+    'base hook' => 'page',
   ];
 
   return $theme;
@@ -45,4 +47,58 @@ function utnews_view_listing_page_views_post_render(ViewExecutable $view) {
     $route = \Drupal::routeMatch()->getCurrentRouteMatch()->getRouteObject();
     $route->setDefault('_title', $title);
   }
+}
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function utnews_view_listing_page_views_pre_render(ViewExecutable $view) {
+  if (isset($view) && ($view->storage->id() == 'utnews_listing_page')) {
+    $view->element['#attached']['library'][] =
+    'utnews_view_listing_page/listing';
+    $view->element['#attached']['library'][] =
+    'utexas_layout_builder_styles/border-styles';
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function utnews_view_listing_page_preprocess_page__news(&$variables) {
+  // Styling variables.
+  $variables['attributes']['class'][] = 'utexas-field-border';
+  $variables['attributes']['class'][] = 'utexas-field-background';
+  $variables['#attached']['library'][] = 'utnews_view_listing_page/facet-display';
+  // Create a block instance of each facet with its plugin configuration.
+  $facet_blocks = [
+    'categories' => 'News Categories',
+    'tags' => 'Tags',
+    'author' => 'Author',
+  ];
+  foreach ($facet_blocks as $key => $label) {
+    $variables['facet_blocks'][$key] = [
+      'label' => $label,
+      'block' => \Drupal::service('plugin.manager.block')
+        ->createInstance('facet_block:' . $key, \Drupal::config('facets.facet.' . $key)->getRawData())
+        ->build(),
+    ];
+  }
+  // Create block instance of facet summary.
+  $summary_facet = \Drupal::service('plugin.manager.block')
+    ->createInstance('facets_summary_block:utnews', \Drupal::config('facets_summary.facets_summary.utnews')->getRawData())
+    ->build();
+  // Prepend facet_summary before the main_content block in page.content array.
+  $variables['page']['content'] = NewsContentTypeHelper::arrayInsertBefore('main_page_content', $variables['page']['content'], 'summary_facet', $summary_facet);
+}
+
+/**
+ * Implements hook_plugin_filter_TYPE__CONSUMER_alter().
+ */
+function utnews_view_listing_page_plugin_filter_block__layout_builder_alter(array &$definitions) {
+  // News facets are not designed to be placed with Layout Builder.
+  // Suppress them from that context.
+  unset($definitions['facet_block:author']);
+  unset($definitions['facet_block:categories']);
+  unset($definitions['facet_block:tags']);
+  unset($definitions['facets_summary_block:utnews']);
 }

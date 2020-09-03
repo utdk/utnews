@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.utnews_news.field_utnews_body
     - field.field.node.utnews_news.field_utnews_display_image
     - field.field.node.utnews_news.field_utnews_external_link
+    - field.field.node.utnews_news.field_utnews_featured
     - field.field.node.utnews_news.field_utnews_main_media
     - field.field.node.utnews_news.field_utnews_metatags
     - field.field.node.utnews_news.field_utnews_news_categories
@@ -36,6 +37,16 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: text_default
+    region: content
+  field_utnews_featured:
+    weight: 8
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
     region: content
   field_utnews_main_media:
     type: entity_reference_entity_id
@@ -86,3 +97,4 @@ hidden:
   display_page_title: true
   field_utnews_display_image: true
   field_utnews_external_link: true
+  search_api_excerpt: true

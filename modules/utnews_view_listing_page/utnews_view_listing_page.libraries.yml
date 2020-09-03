@@ -1,0 +1,7 @@
+facet-display:
+  version: 1.x
+  css:
+    theme:
+      css/facet-display.css: {}
+  js:
+    js/facet.js: {}

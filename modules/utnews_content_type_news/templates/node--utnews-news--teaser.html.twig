@@ -80,19 +80,27 @@
     not node.isPublished() ? 'is-unpublished',
     node.bundle|clean_class,
     'clearfix',
+    'utnews__content-wrapper'
   ]
 %}
 
 <div{{ attributes.addClass(classes) }}>
-{% if linked_title %}
-    <h3 class="ut-headline">{{ linked_title }}</h3>
-{% endif %}
-{% if content.field_utnews_publication_date %}
-    <span class="utnews__published">{{ content.field_utnews_publication_date }}</span>
-{% endif %}
-{% if body_summary %}
-    <div class="ut-copy">
-        {{ body_summary }}
-    </div>
-{% endif %}
+  <div>
+    {% if linked_title %}
+      <h3 class="ut-headline">{{ linked_title }}</h3>
+    {% endif %}
+    {% if content.field_utnews_main_media|render|trim is not empty %}
+      <div class="utnews__thumbnail">
+        {{ content.field_utnews_main_media }}
+      </div>
+    {% endif %}
+    {% if content.field_utnews_publication_date %}
+      <span class="utnews__published">{{ content.field_utnews_publication_date }}</span>
+    {% endif %}
+    {% if content.field_utnews_body %}
+      <div class="ut-copy">
+          {{ content.field_utnews_body }}
+      </div>
+    {% endif %}
+  </div>
 </div>

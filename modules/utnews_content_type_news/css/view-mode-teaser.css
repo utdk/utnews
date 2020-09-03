@@ -1,10 +1,35 @@
-/* UTNEWS teaser view mode styling. */
-/* Mobile styling. */
+/* Mobile-first styles. */
 .utnews__published {
   font-style: italic;
   font-size: 14px;
 }
-
 .teaser.utnews-news {
   padding: 0 0 1.5rem 0;
+}
+.teaser .utnews__thumbnail {
+  margin: 0 0 5px 20px;
+  float: right;
+  max-width: 140px;
+}
+
+/* Tablet styling */
+@media screen and (min-width: 600px) {
+  .teaser .utnews__thumbnail {
+    margin: 0 0 5px 20px;
+    min-width: 112px;
+  }
+  .teaser.utnews-news .ut-headline {
+    font-size: 1.25rem;
+    line-height: 1.625rem;
+  }
+}
+
+/* Desktop styling */
+@media screen and (min-width: 900px) {
+  .teaser .utnews__thumbnail {
+    margin: 0 0 5px 20px;
+  }
+  .teaser.utnews-news .ut-headline {
+    line-height: 1.25rem;
+  }
 }

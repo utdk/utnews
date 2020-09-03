@@ -1,0 +1,8 @@
+name: 'Demo Content - News'
+type: module
+description: 'Install demonstration news articles for evaluation purposes.'
+core: 8.x
+core_version_requirement: ^8 || ^9
+dependencies:
+  - utnews:utnews_content_type_news
+package: 'UT Drupal Kit News Add-on'

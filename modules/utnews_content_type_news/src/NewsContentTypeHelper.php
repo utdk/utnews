@@ -4,8 +4,6 @@ namespace Drupal\utnews_content_type_news;
 
 use Drupal\node\Entity\Node;
 use Drupal\taxonomy\Entity\Term;
-use Drupal\Core\Url;
-use Drupal\Core\Link;
 use Drupal\utexas_form_elements\UtexasLinkOptionsHelper;
 
 /**
@@ -80,8 +78,9 @@ class NewsContentTypeHelper {
     }
     $values = $node->get($field)->getValue();
     foreach ($values as $value) {
-      $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($value['target_id']);
-      $output[] = $term->getName();
+      if ($term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($value['target_id'])) {
+        $output[] = $term->getName();
+      }
     }
     return $output;
   }
@@ -170,6 +169,70 @@ class NewsContentTypeHelper {
       return UtexasLinkOptionsHelper::buildLink($link_object, [], $node->getTitle());
     }
     return $node->toLink();
+  }
+
+  /**
+   * Inserts a new key/value after the key in the array.
+   *
+   * @todo Consider moving to the kernel when required someplace else.
+   *
+   * @param string $key
+   *   The key to insert after.
+   * @param array $array
+   *   An array to insert in to.
+   * @param string $new_key
+   *   The key to insert.
+   * @param string $new_value
+   *   An value to insert.
+   *
+   * @return array
+   *   The new array if the key exists, the old array otherwise.
+   */
+  public static function arrayInsertAfter($key, array &$array, $new_key, $new_value) {
+    if (array_key_exists($key, $array)) {
+      $new = [];
+      foreach ($array as $k => $value) {
+        $new[$k] = $value;
+        if ($k === $key) {
+          $new[$new_key] = $new_value;
+        }
+      }
+      return $new;
+    }
+    return $array;
+  }
+
+  /**
+   * Inserts a new key/value before the key in the array.
+   *
+   * @todo Consider moving to the kernel when required someplace else.
+   *
+   * @param string $key
+   *   The key to insert before.
+   * @param array $array
+   *   An array to insert in to.
+   * @param string $new_key
+   *   The key to insert.
+   * @param string $new_value
+   *   An value to insert.
+   *
+   * @return array
+   *   The new array if the key exists, the old array otherwise.
+   *
+   * @see array_insert_after()
+   */
+  public static function arrayInsertBefore($key, array &$array, $new_key, $new_value) {
+    if (array_key_exists($key, $array)) {
+      $new = [];
+      foreach ($array as $k => $value) {
+        if ($k === $key) {
+          $new[$new_key] = $new_value;
+        }
+        $new[$k] = $value;
+      }
+      return $new;
+    }
+    return $array;
   }
 
 }

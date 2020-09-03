@@ -164,3 +164,21 @@ function utnews_content_type_news_update_8102() {
     'utnews_content_type_news',
   ], TRUE);
 }
+
+/**
+ * Import updated teaser view mode display & 'featured' checkbox.
+ */
+function utnews_content_type_news_update_8103() {
+  \Drupal::service('features.manager')->import([
+    'utnews_content_type_news',
+  ], TRUE);
+}
+
+/**
+ * Use landscape image derivative in teaser (fixes #54).
+ */
+function utnews_content_type_news_update_8104() {
+  \Drupal::service('features.manager')->import([
+    'utnews_content_type_news',
+  ], TRUE);
+}

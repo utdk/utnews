@@ -5,8 +5,12 @@ type: module
 core: 8.x
 core_version_requirement: '^8 || ^9'
 dependencies:
+  - 'drupal:block'
   - 'drupal:datetime'
-  - 'drupal:views'
+  - 'drupal:facets'
+  - 'drupal:facets_summary'
+  - 'drupal:search_api'
+  - 'drupal:search_api_db'
   - 'drupal:user'
   - 'drupal:views'
   - 'utnews:utnews'

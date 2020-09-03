@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * UT News view listing page installation file.
+ */
+
+/**
+ * Install search modules and import news listing filters config.
+ */
+function utnews_view_listing_page_update_8101() {
+  \Drupal::service('module_installer')->install([
+    'search_api',
+    'search_api_db',
+    'facets',
+    'facets_summary',
+  ]);
+  \Drupal::service('features.manager')->import([
+    'utnews_view_listing_page',
+  ], TRUE);
+}
