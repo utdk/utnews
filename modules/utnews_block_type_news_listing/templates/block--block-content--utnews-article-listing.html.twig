@@ -27,7 +27,15 @@
  * @see template_preprocess_block()
  */
 #}
-<div{{ attributes }}>
+{%
+  set classes = [
+    'block',
+    'block-' ~ configuration.provider|clean_class,
+    'block-' ~ plugin_id|clean_class,
+    'clearfix',
+  ]
+%}
+<div{{attributes.addClass(classes)}}>
   {{ title_prefix }}
   {% if label %}
     <h2{{ title_attributes.addClass('ut-headline--underline') }}>{{ label }}</h2>
