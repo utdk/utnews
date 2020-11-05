@@ -12,10 +12,10 @@
   },
   "require": {
     "composer/installers": "~1.0",
-    "drupal/facets": "1.5.0",
+    "drupal/facets": "1.6.0",
     "drupal/breadcrumbs_visibility": "^1.0",
     "drupal/page_title_visibility": "^1.1",
-    "drupal/search_api": "1.17.0",
+    "drupal/search_api": "1.18.0",
     "utexas/utdk_profile": "^3.0.0-beta.7 || dev-develop"
   },
   "config": {
