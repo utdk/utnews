@@ -1,0 +1,5 @@
+utnews-listing-block:
+  version: VERSION
+  css:
+    layout:
+      css/listing-block.layout.css: {}

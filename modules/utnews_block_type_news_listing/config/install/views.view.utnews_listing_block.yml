@@ -312,6 +312,7 @@ display:
       relationships: {  }
       arguments: {  }
       display_extenders: {  }
+      css_class: 'utnews-listing-block utnews-listing-block--block-1'
     cache_metadata:
       max-age: -1
       contexts:
