@@ -7,6 +7,8 @@
 
 use Drupal\pathauto\Entity\PathautoPattern;
 use Drupal\metatag\Entity\MetatagDefaults;
+use Drupal\block\Entity\Block;
+use Drupal\utnews_content_type_news\NewsContentTypeHelper;
 
 /**
  * Implements hook_install().
@@ -16,6 +18,8 @@ function utnews_content_type_news_install() {
   _utnews_add_pathauto_pattern();
   // Add default metatags.
   _utnews_add_metatags();
+  // Add social sharing block.
+  NewsContentTypeHelper::addSocialSharing();
 }
 
 /**
@@ -24,6 +28,10 @@ function utnews_content_type_news_install() {
 function utnews_content_type_news_uninstall() {
   // Delete default metatags.
   _utnews_delete_metatags();
+  // Remove social sharing block from Block UI.
+  if ($block = Block::load('addtoany_utnews')) {
+    $block->delete();
+  }
 }
 
 /**
