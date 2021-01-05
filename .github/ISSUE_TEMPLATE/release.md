@@ -11,18 +11,17 @@ labels: 'release'
 - [ ] Contributed module dependencies have been updated, if updates are available
 
 ## Release pull request tasks
-
-- [ ] Create release branch from develop, e.g. `release/1.0.0-alpha.3`
-- [ ] Bump version number in `utevent.info.yml`
+- [ ] Create release branch from develop, e.g. `release/1.0.0-alpha.5`
+- [ ] Bump version number in `utnews.info.yml`
 - [ ] Open PR for release branch
 
 ## Release completion tasks
-
 - [ ] After approval, merge release branch to develop & master:
 - Merge using the Gitflow strategy:
     - `git fetch && git checkout develop && git pull origin develop && git merge --no-ff release/<version number>`
     - `git fetch && git checkout master && git pull origin master && git merge --no-ff release/<version number>`
     - `git tag -a <version number>`
     - `git push origin develop && git push origin master && git push origin <version number>`
-- [ ] [Create a new release](https://github.austin.utexas.edu/eis1-wcs/utevent/releases/new) (version number and release title should be the same (e.g., `1.0.0-alpha.3`)
-- [ ] Use [gren](https://github.com/github-tools/github-release-notes) generate the release notes `gren release --api-url=https://github.austin.utexas.edu/api/v3 --repo=utevent --username=eis1-wcs --ignore-issues-with="wontfix,release,duplicate,invalid" --override`
+- [ ] [Create a new release](https://github.austin.utexas.edu/eis1-wcs/utnews/releases/new) (version number and release title should be the same (e.g., `1.0.0-alpha.5`)
+- [ ] Use [gren](https://github.com/github-tools/github-release-notes) generate the release notes `gren release --api-url=https://github.austin.utexas.edu/api/v3 --repo=utnews --username=eis1-wcs --ignore-issues-with="wontfix,release,duplicate,invalid" --override`
+
