@@ -4,12 +4,12 @@ namespace Drupal\utnews_view_listing_page\Form;
 
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\utnews\Form\UtnewsConfigurationForm;
+use Drupal\utnews\Form\BaseConfigurationForm;
 
 /**
  * Supplement form UI to add setting for which blocks & layouts are available.
  */
-class ListingPageConfig extends UtnewsConfigurationForm {
+class ListingPageConfig extends BaseConfigurationForm {
 
   /**
    * The actual form elements.
@@ -24,9 +24,6 @@ class ListingPageConfig extends UtnewsConfigurationForm {
         ':link' => \Drupal::request()->getSchemeAndHttpHost() . '/news',
       ]),
     ];
-    // Remove message from UtnewsConfigurationForm default which states
-    // there is no configuration available.
-    unset($form['placeholder']);
 
     $form['#submit'][] = [$this, 'submitListingConfig'];
   }

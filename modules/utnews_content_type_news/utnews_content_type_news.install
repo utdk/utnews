@@ -9,6 +9,7 @@ use Drupal\pathauto\Entity\PathautoPattern;
 use Drupal\metatag\Entity\MetatagDefaults;
 use Drupal\block\Entity\Block;
 use Drupal\utnews_content_type_news\NewsContentTypeHelper;
+use Drupal\utnews\Permissions;
 
 /**
  * Implements hook_install().
@@ -20,6 +21,11 @@ function utnews_content_type_news_install() {
   _utnews_add_metatags();
   // Add social sharing block.
   NewsContentTypeHelper::addSocialSharing();
+
+  // Add standard permissions to "utexas_site_manager" & "utexas_content_editor"
+  // if those roles exist.
+  Permissions::assignPermissions('editor', 'utexas_content_editor');
+  Permissions::assignPermissions('manager', 'utexas_site_manager');
 }
 
 /**
