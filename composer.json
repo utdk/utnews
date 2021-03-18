@@ -1,7 +1,7 @@
 {
   "name": "utexas/utnews",
   "type": "drupal-module",
-  "description": "UTexas-focused feature to provide a generalized 'News article' content type and supporting components",
+  "description": "Drupal module that provides a news article content type and supporting components for use with the UT Drupal Kit.",
   "keywords": ["Drupal"],
   "license": ["GPL-2.0-or-later"],
   "homepage": "https://github.austin.utexas.edu/eis1-wcs/utnews",
