@@ -43,7 +43,3 @@ Fixes #
 
 ## Acceptance Criteria
 <!-- Copy or link to acceptance criteria in issue -->
-
-## Potential Reviewers
-
-@eis1-wcs/drupal-utdk
