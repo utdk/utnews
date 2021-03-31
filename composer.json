@@ -1,6 +1,6 @@
 {
   "name": "utexas/utnews",
-  "type": "drupal-module",
+  "type": "drupal-custom-module",
   "description": "Drupal module that provides a news article content type and supporting components for use with the UT Drupal Kit.",
   "keywords": ["Drupal"],
   "license": ["GPL-2.0-or-later"],
