@@ -29,12 +29,8 @@ Fixes #
 - [ ] I have added tests to cover my changes.
 
 ## Reference: installing a site with this feature
-<!--- Include notes for both functional testing & code review -->
-0. `git clone git@github.austin.utexas.edu:eis1-wcs/utdk_scaffold.git && cd utdk_scaffold`
-0. `composer require utexas/utdk_profile:dev-<BRANCH-NAME>`
-0. `composer run-script dev-scaffold`
-0. `fin init && fin init-site --wcs`
-0. `composer require utexas/utnews:dev-<BRANCH-NAME>`
+<!--- Include installation snippet if multiple repos are involved -->
+0. Generate the installation snippet with the branch that corresponds to the PR at https://utdirect.utexas.edu/apps/wcs/wcms/utdk3/environment-generator.
 0. `fin drush en utnews -y`
 
 ## Reference: running tests locally
@@ -43,7 +39,3 @@ Fixes #
 
 ## Acceptance Criteria
 <!-- Copy or link to acceptance criteria in issue -->
-
-## Potential Reviewers
-
-@eis1-wcs/drupal-utdk

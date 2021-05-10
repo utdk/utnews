@@ -20,3 +20,24 @@ function utnews_requirements($phase) {
   }
   return $requirements;
 }
+
+/**
+ * Implements hook_install().
+ */
+function utnews_install() {
+  // Enable this add-on's read-only functionality. We do this in a hook_install()
+  // implementation so that the module may be uninstalled.
+  if (\Drupal::moduleHandler()->moduleExists('utnews_readonly') === FALSE) {
+    \Drupal::service('module_installer')->install(['utnews_readonly']);
+  }
+}
+
+/**
+ * Enable the utnews_readonly module.
+ */
+function utnews_update_8101() {
+  // Enable this add-ons read-only functionality.
+  if (\Drupal::moduleHandler()->moduleExists('utnews_readonly') === FALSE) {
+    \Drupal::service('module_installer')->install(['utnews_readonly']);
+  }
+}

@@ -1,0 +1,10 @@
+services:
+  utnews_readonly.route_subscriber:
+    class: Drupal\utnews_readonly\Routing\RouteSubscriber
+    tags:
+      - { name: event_subscriber }
+  access_check.utnews:
+    class: Drupal\utnews_readonly\Access\ReadOnlyAccess
+    arguments: ["@current_route_match"]
+    tags:
+      - { name: access_check, applies_to: _utnews }
