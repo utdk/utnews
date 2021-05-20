@@ -107,7 +107,13 @@ class DemoContent {
       ])->save();
       $weight++;
     }
-    $news_categories = ['Demo Category 1', 'Demo Category 2'];
+    $news_categories = [
+      'Demo Category 1',
+      'Demo Category 2',
+      'General',
+      'Opinion',
+      'Press Releases',
+    ];
     $weight = 0;
     foreach ($news_categories as $term) {
       Term::create([
