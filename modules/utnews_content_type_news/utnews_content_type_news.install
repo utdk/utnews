@@ -206,3 +206,12 @@ function utnews_content_type_news_update_8105() {
   $metatag->overwriteTags($tag);
   $metatag->save();
 }
+
+/**
+ * Update help text on main image (#51).
+ */
+function utnews_content_type_news_update_8106() {
+  \Drupal::service('features.manager')->import([
+    'utnews_content_type_news',
+  ], TRUE);
+}
