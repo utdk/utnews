@@ -117,7 +117,7 @@ function _utnews_add_metatags() {
     'og_description' => '[node:field_utnews_body:summary]',
     'og_image' => '[node:field_utnews_main_media:entity:field_utexas_media_image:utexas_image_style_1140w_616h]',
     'og_url' => '[current-page:url]',
-    'twitter_cards_type' => 'summary_large_image',
+    'twitter_cards_type' => 'summary',
     'schema_article_date_modified' => '[node:changed:html_datetime]',
     'schema_article_type' => 'NewsArticle',
     'schema_article_main_entity_of_page' => '[current-page:url]',
@@ -195,4 +195,14 @@ function utnews_content_type_news_update_8104() {
   \Drupal::service('features.manager')->import([
     'utnews_content_type_news',
   ], TRUE);
+}
+
+/**
+ * Change metatag twitter_card_type to summary (fixes #109).
+ */
+function utnews_content_type_news_update_8105() {
+  $metatag = MetatagDefaults::load('node__utnews_news');
+  $tag = ['twitter_cards_type' => 'summary'];
+  $metatag->overwriteTags($tag);
+  $metatag->save();
 }
