@@ -201,10 +201,11 @@ function utnews_content_type_news_update_8104() {
  * Change metatag twitter_card_type to summary (fixes #109).
  */
 function utnews_content_type_news_update_8105() {
-  $metatag = MetatagDefaults::load('node__utnews_news');
-  $tag = ['twitter_cards_type' => 'summary'];
-  $metatag->overwriteTags($tag);
-  $metatag->save();
+  if ($metatag = MetatagDefaults::load('node__utnews_news')) {
+    $tag = ['twitter_cards_type' => 'summary'];
+    $metatag->overwriteTags($tag);
+    $metatag->save();
+  }
 }
 
 /**
