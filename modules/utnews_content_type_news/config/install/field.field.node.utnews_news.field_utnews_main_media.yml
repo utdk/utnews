@@ -10,7 +10,7 @@ field_name: field_utnews_main_media
 entity_type: node
 bundle: utnews_news
 label: 'Main image'
-description: 'This image can be displayed both on the article page and as a thumbnail in lists of articles. To accommodate retina screens, use an image with a width of 1600px or greater. The image will be automatically cropped when displayed as a thumbnail.'
+description: 'This image can be displayed both on the article page and as a thumbnail in lists of articles. For best results, use an image size of 1600x864px (1.85:1 ratio).'
 required: false
 translatable: false
 default_value: {  }

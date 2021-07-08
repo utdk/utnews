@@ -3,6 +3,7 @@
 namespace Drupal\utnews_readonly;
 
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\node\NodeTypeInterface;
 
 /**
  * Business logic for making the add-on UI read-only.
@@ -95,19 +96,24 @@ class ReadOnlyHelper {
   public static function getId(RouteMatchInterface $route) {
     $id = FALSE;
     if ($view = $route->getParameter('view')) {
-      $id = $view->id();
+      return $view->id();
     }
     elseif ($bundle = $route->getParameter('bundle')) {
-      $id = $bundle;
+      return $bundle;
     }
     elseif ($node_type = $route->getParameter('node_type')) {
-      $id = $node_type->id();
+      if (is_string($node_type)) {
+        return $node_type;
+      }
+      if ($node_type instanceof NodeTypeInterface) {
+        return $node_type->id();
+      }
     }
     elseif ($block_type = $route->getParameter('block_content_type')) {
-      $id = $block_type->id();
+      return $block_type->id();
     }
     elseif ($vocab = $route->getParameter('taxonomy_vocabulary')) {
-      $id = $vocab->id();
+      return $vocab->id();
     }
     return $id;
   }

@@ -2,8 +2,12 @@
   "name": "utexas/utnews",
   "type": "drupal-custom-module",
   "description": "Drupal module that provides a news article content type and supporting components for use with the UT Drupal Kit.",
-  "keywords": ["Drupal"],
-  "license": ["GPL-2.0-or-later"],
+  "keywords": [
+    "Drupal"
+  ],
+  "license": [
+    "GPL-2.0-or-later"
+  ],
   "homepage": "https://github.austin.utexas.edu/eis1-wcs/utnews",
   "minimum-stability": "dev",
   "support": {
@@ -12,12 +16,13 @@
   },
   "require": {
     "drupal/breadcrumbs_visibility": "^1.0",
-    "drupal/facets": "1.6.0",
+    "drupal/facets": "1.8.0",
     "drupal/page_title_visibility": "^1.1",
     "drupal/search_api": "1.19.0",
-    "utexas/utdk_profile": "^3.0.0 || dev-develop"
+    "utexas/utdk_profile": "^3.1.0 || dev-develop"
   },
   "config": {
     "sort-packages": true
-  }
+  },
+  "prefer-stable": true
 }
