@@ -69,26 +69,6 @@ function utnews_view_listing_page_preprocess_page__news(&$variables) {
   $variables['attributes']['class'][] = 'utexas-field-border';
   $variables['attributes']['class'][] = 'utexas-field-background';
   $variables['#attached']['library'][] = 'utnews_view_listing_page/facet-display';
-  // Create a block instance of each facet with its plugin configuration.
-  $facet_blocks = [
-    'categories' => 'News Categories',
-    'tags' => 'Tags',
-    'author' => 'Author',
-  ];
-  foreach ($facet_blocks as $key => $label) {
-    $variables['facet_blocks'][$key] = [
-      'label' => $label,
-      'block' => \Drupal::service('plugin.manager.block')
-        ->createInstance('facet_block:' . $key, \Drupal::config('facets.facet.' . $key)->getRawData())
-        ->build(),
-    ];
-  }
-  // Create block instance of facet summary.
-  $summary_facet = \Drupal::service('plugin.manager.block')
-    ->createInstance('facets_summary_block:utnews', \Drupal::config('facets_summary.facets_summary.utnews')->getRawData())
-    ->build();
-  // Prepend facet_summary before the main_content block in page.content array.
-  $variables['page']['content'] = NewsContentTypeHelper::arrayInsertBefore('main_page_content', $variables['page']['content'], 'summary_facet', $summary_facet);
 }
 
 /**

@@ -27,6 +27,7 @@ widget:
     hide_reset_when_no_selection: true
 query_operator: or
 use_hierarchy: true
+keep_hierarchy_parents_active: false
 expand_hierarchy: false
 enable_parent_when_child_gets_disabled: true
 hard_limit: 0
@@ -69,5 +70,7 @@ processor_configs:
       build: 15
     settings: {  }
 empty_behavior:
-  behavior: none
+  behavior: text
+  text_format: plain_text
+  text: 'No matching items.'
 show_title: false

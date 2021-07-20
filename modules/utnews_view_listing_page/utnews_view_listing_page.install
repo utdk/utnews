@@ -5,6 +5,67 @@
  * UT News view listing page installation file.
  */
 
+use Drupal\block\Entity\Block;
+
+/**
+ * Implements hook_install().
+ */
+function utnews_view_listing_page_install() {
+  _utnews_view_listing_page_add_facetblocks();
+}
+
+/**
+ * Helper function. Programmatically place facet block instances in layout.
+ */
+function _utnews_view_listing_page_add_facetblocks() {
+  $facet_blocks = [
+    'categories' => 'Filter by News Category',
+    'tags' => 'Filter by Tag',
+    'author' => 'Filter by Author',
+  ];
+  $theme = \Drupal::config('system.theme')->get('default');
+  $blockEntityManager = \Drupal::entityTypeManager()->getStorage('block');
+  $inc = 0;
+  foreach ($facet_blocks as $key => $label) {
+    if (Block::load('utnews_' . $key)) {
+      // Do not populate facet block if it already exists.
+      continue;
+    }
+    $block = $blockEntityManager->create([
+      'id' => 'utnews_' . $key,
+      'settings' => [
+        'label' => $label,
+        'label_display' => 'visible',
+      ],
+      'weight' => $inc,
+      'plugin' => 'facet_block:' . $key,
+    ]);
+    $block->set('theme', $theme);
+    $block->setVisibilityConfig('request_path', ['pages' => '/news']);
+    // If the current theme does not have this region, no harm will be caused.
+    $block->setRegion('sidebar_first');
+    $block->enable();
+    $block->save();
+    $inc++;
+  }
+  if (!Block::load('utnews_facets_summary_block')) {
+    $block = $blockEntityManager->create([
+      'id' => 'utnews_facets_summary_block',
+      'settings' => [
+        'label' => 'News listing page facet summary',
+        'label_display' => 0,
+      ],
+      'weight' => -100,
+      'plugin' => 'facets_summary_block:utnews',
+    ]);
+    $block->set('theme', $theme);
+    $block->setVisibilityConfig('request_path', ['pages' => '/news']);
+    $block->setRegion('content');
+    $block->enable();
+    $block->save();
+  }
+}
+
 /**
  * Install search modules and import news listing filters config.
  */
@@ -18,4 +79,16 @@ function utnews_view_listing_page_update_8101() {
   \Drupal::service('features.manager')->import([
     'utnews_view_listing_page',
   ], TRUE);
+}
+
+/**
+ * Add facet blocks to Block Layout (Resolves #50).
+ */
+function utnews_view_listing_page_update_8102() {
+  // Import updated configuration to facets.
+  \Drupal::service('features.manager')->import([
+    'utnews_view_listing_page',
+  ], TRUE);
+  // Place facets in block layout.
+  _utnews_view_listing_page_add_facetblocks();
 }
