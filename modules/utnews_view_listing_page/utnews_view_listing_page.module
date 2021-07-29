@@ -36,7 +36,8 @@ function utnews_view_listing_page_form_utnews_general_config_alter(&$form, FormS
  */
 function utnews_view_listing_page_views_post_render(ViewExecutable $view) {
   // Set the page title based on editor-provided value.
-  if ($view->id() !== 'utnews_listing_page') {
+  $view_id = 'utnews_listing_page';
+  if ($view->id() !== $view_id) {
     return;
   }
   $config = \Drupal::config('utnews_view_listing_page.config');
@@ -53,7 +54,8 @@ function utnews_view_listing_page_views_post_render(ViewExecutable $view) {
  * Implements hook_views_pre_render().
  */
 function utnews_view_listing_page_views_pre_render(ViewExecutable $view) {
-  if (isset($view) && ($view->storage->id() == 'utnews_listing_page')) {
+  $view_id = 'utnews_listing_page';
+  if ($view->storage->id() == $view_id) {
     $view->element['#attached']['library'][] =
     'utnews_view_listing_page/listing';
     $view->element['#attached']['library'][] =

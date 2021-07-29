@@ -2,11 +2,11 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_utnews_article_author
     - search_api.index.utnews
   module:
     - search_api
     - user
+    - utnews_view_listing_page
 id: utnews_listing_page
 label: 'News Listing Page'
 module: views
@@ -77,19 +77,17 @@ display:
           row_class_default: false
           row_class_custom: ''
       row:
-        type: search_api
+        type: fields
         options:
-          view_modes:
-            'entity:node':
-              utnews_news: teaser
+          default_field_elements: true
+          inline: {  }
+          separator: ''
+          hide_empty: false
       fields:
-        author:
+        utnews_listing_search_api:
+          id: utnews_listing_search_api
           table: search_api_index_utnews
-          field: author
-          id: author
-          entity_type: null
-          entity_field: null
-          plugin_id: search_api_field
+          field: utnews_listing_search_api
           relationship: none
           group_type: group
           admin_label: ''
@@ -126,7 +124,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: true
+          element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -134,26 +132,10 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings: {  }
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          field_rendering: true
-          fallback_handler: search_api
-          fallback_options:
-            link_to_item: false
-            use_highlighting: false
-            multi_type: separator
-            multi_separator: ', '
+          view_modes:
+            'entity:node':
+              utnews_news: teaser
+          plugin_id: utnews_listing_search_api
       filters:
         status:
           id: status
@@ -216,13 +198,11 @@ display:
     cache_metadata:
       max-age: -1
       contexts:
-        - 'languages:language_content'
         - 'languages:language_interface'
         - url.query_args
         - 'user.node_grants:view'
         - user.permissions
       tags:
-        - 'config:field.storage.node.field_utnews_article_author'
         - 'config:search_api.index.utnews'
   page_1:
     display_plugin: page
@@ -239,11 +219,9 @@ display:
     cache_metadata:
       max-age: -1
       contexts:
-        - 'languages:language_content'
         - 'languages:language_interface'
         - url.query_args
         - 'user.node_grants:view'
         - user.permissions
       tags:
-        - 'config:field.storage.node.field_utnews_article_author'
         - 'config:search_api.index.utnews'

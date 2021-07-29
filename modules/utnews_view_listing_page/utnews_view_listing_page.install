@@ -6,12 +6,32 @@
  */
 
 use Drupal\block\Entity\Block;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * Implements hook_install().
  */
 function utnews_view_listing_page_install() {
   _utnews_view_listing_page_add_facetblocks();
+  _utnews_view_listing_page_add_configuration();
+}
+
+/**
+ * Helper function to create default configuration.
+ *
+ * @return void
+ */
+function _utnews_view_listing_page_add_configuration() {
+  // Import default configuration that can subsequently be managed by sites.
+  // For SaaS-type sites to inherit changes to this configuration, an update
+  // hook needs to be added that will programmatically load the configuration
+  // entity and update it.
+  $module_handler = \Drupal::service('module_handler');
+  $module_path = $module_handler->getModule('utnews_view_listing_page')->getPath();
+  $config = 'utnews_view_listing_page.config';
+  $config_path = $module_path . '/config/default/' . $config . '.yml';
+  $data = Yaml::parse(file_get_contents($config_path));
+  \Drupal::configFactory()->getEditable($config)->setData($data)->save(TRUE);
 }
 
 /**
@@ -91,4 +111,19 @@ function utnews_view_listing_page_update_8102() {
   ], TRUE);
   // Place facets in block layout.
   _utnews_view_listing_page_add_facetblocks();
+}
+
+/**
+ * Update views handler for listings (#33).
+ */
+function utnews_view_listing_page_update_8103() {
+  \Drupal::service('features.manager')->import([
+    'utnews_view_listing_page',
+  ], TRUE);
+  // Set display options to "true" for existing sites.
+  $settings = 'utnews_view_listing_page.config';
+  $config = \Drupal::configFactory()->getEditable($settings);
+  $config->set('display_thumbnail', 1)->save(TRUE);
+  $config->set('display_summary', 1)->save(TRUE);
+  $config->set('display_date', 1)->save(TRUE);
 }
