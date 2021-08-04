@@ -13,7 +13,7 @@
   font-size: 14px;
 }
 .teaser .utnews__thumbnail {
-  margin: 0 0 5px 20px;
+  margin: 10px 0 5px 20px;
   float: right;
   max-width: 140px;
 }
@@ -21,7 +21,6 @@
 /* Tablet styling */
 @media screen and (min-width: 600px) {
   .teaser .utnews__thumbnail {
-    margin: 0 0 5px 20px;
     min-width: 112px;
   }
   .teaser.utnews-news .ut-headline {
@@ -32,9 +31,6 @@
 
 /* Desktop styling */
 @media screen and (min-width: 900px) {
-  .teaser .utnews__thumbnail {
-    margin: 0 0 5px 20px;
-  }
   .teaser.utnews-news .ut-headline {
     line-height: 1.25rem;
   }
