@@ -1,10 +1,16 @@
 /* Mobile-first styles. */
-.utnews__published {
-  font-style: italic;
-  font-size: 14px;
-}
 .teaser.utnews-news {
   padding: 0 0 1.5rem 0;
+}
+.utnews-news h3.ut-headline {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+.utnews-news .utnews__published {
+  margin-bottom: .5rem;
+  display: inline-block;
+  font-style: italic;
+  font-size: 14px;
 }
 .teaser .utnews__thumbnail {
   margin: 0 0 5px 20px;
