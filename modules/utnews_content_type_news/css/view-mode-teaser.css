@@ -17,11 +17,20 @@
   float: right;
   max-width: 140px;
 }
-
+/* Set /news page images width for small screens. */
+.views-field-utnews-listing-search-api .utnews__thumbnail {
+  min-width: 120px;
+  width: 33%;
+}
 /* Tablet styling */
 @media screen and (min-width: 600px) {
   .teaser .utnews__thumbnail {
     min-width: 112px;
+  }
+  /* Set /news page images width for tablet and desktop screens. */
+  .views-field-utnews-listing-search-api .utnews__thumbnail {
+    width: 190px;
+    max-width: unset;
   }
   .teaser.utnews-news .ut-headline {
     font-size: 1.25rem;
