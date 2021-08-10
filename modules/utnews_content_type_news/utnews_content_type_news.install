@@ -216,3 +216,12 @@ function utnews_content_type_news_update_8106() {
     'utnews_content_type_news',
   ], TRUE);
 }
+
+/**
+ * Add external link to node view (#117).
+ */
+function utnews_content_type_news_update_8107() {
+  \Drupal::service('features.manager')->import([
+    'utnews_content_type_news',
+  ], TRUE);
+}

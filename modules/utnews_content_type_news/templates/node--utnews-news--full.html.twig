@@ -97,6 +97,12 @@
         <span class="utnews__published">{{ content.field_utnews_publication_date }}</span>
       </div>
     {% endif %}
+    {% if content.field_utnews_external_link %}
+      <div class="utnews__external-link-wrapper">
+        <span>External link:</span>
+        {{ content.field_utnews_external_link }}
+      </div>
+    {% endif %}
   </div>
 
   {% if has_sidebar_fields %}
