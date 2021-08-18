@@ -67,6 +67,7 @@ content:
 hidden:
   display_breadcrumbs: true
   display_page_title: true
+  display_updated: true
   field_utnews_article_author: true
   field_utnews_display_image: true
   field_utnews_external_link: true
