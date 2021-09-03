@@ -91,13 +91,13 @@
       </div>
     {% endif %}
 
-    {% if content.field_utnews_publication_date %}
-      <div class="utnews__pulbished-wrapper">
+    {% if content.field_utnews_publication_date|render is not empty %}
+      <div class="utnews__published-wrapper">
         <span class="field__label">Published: </span>
         <span class="utnews__published">{{ content.field_utnews_publication_date }}</span>
       </div>
     {% endif %}
-    {% if content.field_utnews_external_link %}
+    {% if content.field_utnews_external_link|render is not empty %}
       <div class="utnews__external-link-wrapper">
         <span>External link:</span>
         {{ content.field_utnews_external_link }}
