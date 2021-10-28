@@ -91,11 +91,26 @@ function utnews_readonly_entity_operation_alter(array &$operations, EntityInterf
  * Implements hook_page_attachments().
  */
 function utnews_readonly_page_attachments(array &$attachments) {
-  // Add display modifications to specific pages that can't be targeted as
-  // routes.
-  $route = \Drupal::routeMatch();
-  $id = ReadOnlyHelper::getId($route);
-  if (ReadOnlyHelper::matchesReadOnlyPattern($id)) {
+  // Add display modifications to specific pages.
+  $restricted_paths = [
+    '/admin/structure/types/manage/utnews_news/fields',
+    '/admin/structure/types/manage/utnews_news/form-display',
+    '/admin/structure/types/manage/utnews_news/display',
+    '/admin/structure/block/block-content/manage/utnews_news_listing/fields',
+    '/admin/structure/block/block-content/manage/utnews_news_listing/form-display',
+    '/admin/structure/block/block-content/manage/utnews_news_listing/display',
+    '/admin/structure/taxonomy/manage/utnews_authors/overview/fields',
+    '/admin/structure/taxonomy/manage/utnews_authors/overview/form-display',
+    '/admin/structure/taxonomy/manage/utnews_authors/overview/display',
+    '/admin/structure/taxonomy/manage/utnews_categories/overview/fields',
+    '/admin/structure/taxonomy/manage/utnews_categories/overview/form-display',
+    '/admin/structure/taxonomy/manage/utnews_categories/overview/display',
+    '/admin/structure/taxonomy/manage/utnews_tags/overview/fields',
+    '/admin/structure/taxonomy/manage/utnews_tags/overview/form-display',
+    '/admin/structure/taxonomy/manage/utnews_tags/overview/display',
+  ];
+  $current_path = \Drupal::service('path.current')->getPath();
+  if (in_array($current_path, $restricted_paths)) {
     $attachments['#attached']['library'][] = 'utnews_readonly/base';
   }
 }

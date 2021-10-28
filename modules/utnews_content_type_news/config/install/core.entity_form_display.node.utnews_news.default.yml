@@ -45,6 +45,13 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
+  display_updated:
+    type: boolean_checkbox
+    weight: 10
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   field_utnews_article_author:
     weight: 28
     settings: {  }

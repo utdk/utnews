@@ -11,7 +11,7 @@ field_name: field_utnews_external_link
 entity_type: node
 bundle: utnews_news
 label: 'External link'
-description: 'Enter a URL to bypass the full article view and make this article’s title link directly to an external site. An “external link” icon will display with the link title.'
+description: "To add a news listing item that links the title above directly to an external website, enter a URL here.\r\n<ul>\r\n<li>Visually indicate that this item links to an external website by selecting \"external link icon\" below.</li>\r\n<li>Since visitors will be sent to the external site, there is generally no need to populate the \"body\" field below.</li>\r\n<li>If your news listings display thumbnail images, you'll still need to upload an image.</li>\r\n</ul>"
 required: false
 translatable: false
 default_value: {  }

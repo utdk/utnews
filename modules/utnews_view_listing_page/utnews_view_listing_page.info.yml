@@ -2,13 +2,13 @@ name: 'View - News Listing Page'
 description: 'Provides the "News" listing page'
 package: 'UT Drupal Kit News Add-on'
 type: module
-core: 8.x
-core_version_requirement: '^8 || ^9'
+core_version_requirement: '^8.9 || ^9'
 dependencies:
   - 'drupal:block'
   - 'drupal:datetime'
   - 'drupal:facets'
   - 'drupal:facets_summary'
+  - 'drupal:node'
   - 'drupal:search_api'
   - 'drupal:search_api_db'
   - 'drupal:user'

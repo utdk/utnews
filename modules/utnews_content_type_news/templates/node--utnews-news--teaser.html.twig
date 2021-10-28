@@ -86,14 +86,16 @@
 
 <div{{ attributes.addClass(classes) }}>
   <div>
-    {% if linked_title %}
-      <h3 class="ut-headline">{{ linked_title }}</h3>
-    {% endif %}
     {% if content.field_utnews_main_media|render|trim is not empty %}
       <div class="utnews__thumbnail">
         {{ content.field_utnews_main_media }}
       </div>
     {% endif %}
+
+    {% if linked_title %}
+      <h3 class="ut-headline">{{ linked_title }}</h3>
+    {% endif %}
+
     {% if content.field_utnews_publication_date %}
       <span class="utnews__published">{{ content.field_utnews_publication_date }}</span>
     {% endif %}

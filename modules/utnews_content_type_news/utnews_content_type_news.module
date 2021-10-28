@@ -38,8 +38,8 @@ function utnews_content_type_news_preprocess_node(&$variables) {
   $variables['has_sidebar_fields'] = NewsContentTypeHelper::hasSidebarFields($node);
   $variables['author_information'] = NewsContentTypeHelper::prepareAuthorInformation($node);
   $variables['main_image'] = NewsContentTypeHelper::prepareMainImage($node);
-  $variables['news_tags'] = NewsContentTypeHelper::prepareNewsTaxonomy($node, 'field_utnews_news_tags');
-  $variables['news_categories'] = NewsContentTypeHelper::prepareNewsTaxonomy($node, 'field_utnews_news_categories');
+  $variables['news_tags'] = NewsContentTypeHelper::prepareNewsTaxonomy($node, 'field_utnews_news_tags', 'tags');
+  $variables['news_categories'] = NewsContentTypeHelper::prepareNewsTaxonomy($node, 'field_utnews_news_categories', 'categories');
   $variables['linked_title'] = NewsContentTypeHelper::prepareLinkedTitle($node);
   $variables['body_summary'] = $node->get('field_utnews_body')->getValue()[0]['summary'];
 
