@@ -151,7 +151,7 @@ display:
           operator: '='
           value: All
           group: 1
-          exposed: true
+          exposed: false
           expose:
             operator_id: ''
             label: 'Featured article'
@@ -192,7 +192,7 @@ display:
           operator: or
           value: {  }
           group: 1
-          exposed: true
+          exposed: false
           expose:
             operator_id: field_utnews_news_tags_target_id_op
             label: 'News tags'
@@ -240,7 +240,7 @@ display:
           operator: or
           value: {  }
           group: 1
-          exposed: true
+          exposed: false
           expose:
             operator_id: field_utnews_news_categories_target_id_op
             label: 'News categories'
