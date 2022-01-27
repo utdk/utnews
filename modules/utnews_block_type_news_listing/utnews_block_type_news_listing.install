@@ -75,3 +75,12 @@ function utnews_block_type_news_listing_update_8103() {
     'utnews_block_type_news_listing',
   ], TRUE);
 }
+
+/**
+ * Issue #177: Exposed filters showing on News listing blocks.
+ */
+function utnews_block_type_news_listing_update_8104() {
+  \Drupal::service('features.manager')->import([
+    'utnews_block_type_news_listing',
+  ], TRUE);
+}
