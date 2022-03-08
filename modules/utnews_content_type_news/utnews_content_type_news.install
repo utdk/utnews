@@ -29,6 +29,19 @@ function utnews_content_type_news_install() {
 }
 
 /**
+ * Implements hook_update_dependencies().
+ */
+function utnews_content_type_news_update_dependencies() {
+  // The utnews_content_type_news_update_8109() function provided
+  // by this module must run after the utexas_update_8127() function provided by
+  // 'utexas' prfile.
+  $dependencies['utnews_content_type_news'][8109] = [
+    'utexas' => 8127,
+  ];
+  return $dependencies;
+}
+
+/**
  * Implements hook_uninstall().
  */
 function utnews_content_type_news_uninstall() {
@@ -233,4 +246,11 @@ function utnews_content_type_news_update_8108() {
   \Drupal::service('features.manager')->import([
     'utnews_content_type_news',
   ], TRUE);
+}
+
+/**
+ * Relocate Social Sharing block to addtoany_utexas (utdk_profile #1785).
+ */
+function utnews_content_type_news_update_8109() {
+  NewsContentTypeHelper::addSocialSharing();
 }
