@@ -290,6 +290,7 @@ display:
           exposed: false
           expose:
             label: ''
+            field_identifier: field_utnews_publication_date_value
           granularity: second
           plugin_id: datetime
       title: 'News listing block'

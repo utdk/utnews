@@ -249,42 +249,23 @@ class NewsContentTypeHelper {
    * Helper function to place AddToAny block on News content type.
    */
   public static function addSocialSharing() {
-    $moduleHandler = \Drupal::service('module_handler');
-    // Only add if the addtoany module is enabled.
-    if (!$moduleHandler->moduleExists('addtoany')) {
-      return;
+    // Set Social Sharing links to display on News articles.
+    if ($block = Block::load('addtoany_utexas')) {
+      $block->enable();
+      $visibility = $block->getVisibility();
+      if (isset($visibility['entity_bundle:node']['bundles'])) {
+        $visibility['entity_bundle:node']['bundles']['utnews_news'] = 'utnews_news';
+        $block->setVisibilityConfig("entity_bundle:node", [
+          'bundles' => $visibility['entity_bundle:node']['bundles'],
+          'negate' => $visibility['entity_bundle:node']['negate'],
+          'context_mapping' => $visibility['entity_bundle:node']['context_mapping'],
+        ]);
+        $block->save();
+        if ($legacy_block = Block::load('addtoany_utnews')) {
+          $legacy_block->delete();
+        }
+      }
     }
-    $blockEntityManager = \Drupal::entityTypeManager()->getStorage('block');
-    $block = $blockEntityManager->create([
-      'id' => 'addtoany_utnews',
-      'settings' => [
-        'label' => 'Social sharing block for News',
-        'provider' => 'addtoany',
-        'label_display' => 0,
-      ],
-      'plugin' => 'addtoany_block',
-      'theme' => \Drupal::configFactory()->getEditable('system.theme')->get('default'),
-    ]);
-    $block->setRegion('content');
-
-    $weight = 0;
-    // Place this block directly above the main content.
-    if ($page_title = Block::load('main_page_content')) {
-      $weight = $page_title->getWeight();
-      $weight = $weight - 1;
-    }
-    $block->setWeight($weight);
-    $block->enable();
-    $block->setVisibilityConfig("entity_bundle:node", [
-      'bundles' => [
-        'utnews_news' => 'utnews_news',
-      ],
-      'negate' => FALSE,
-      'context_mapping' => [
-        'node' => '@node.node_route_context:node',
-      ],
-    ]);
-    $block->save();
   }
 
 }
