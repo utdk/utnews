@@ -254,3 +254,12 @@ function utnews_content_type_news_update_8108() {
 function utnews_content_type_news_update_8109() {
   NewsContentTypeHelper::addSocialSharing();
 }
+
+/**
+ * HOTFIX: Allow field_utnews_display_image node field to... (#191).
+ */
+function utnews_content_type_news_update_8110() {
+  \Drupal::service('features.manager')->import([
+    'utnews_content_type_news',
+  ], TRUE);
+}
