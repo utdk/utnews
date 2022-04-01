@@ -28,13 +28,6 @@ class ConfigOverrider implements ConfigFactoryOverrideInterface {
   protected $entityTypeManager;
 
   /**
-   * The module path.
-   *
-   * @var string
-   */
-  protected $modulePath;
-
-  /**
    * The entity type manager service.
    *
    * @var \Drupal\Core\Config\Entity\ConfigEntityStorageInterface
@@ -63,10 +56,10 @@ class ConfigOverrider implements ConfigFactoryOverrideInterface {
   public function loadOverrides($names) {
     $overrides = [];
 
-    $config_name = 'field.field.node.utnews_news.field_utnews_display_image';
+    $config_name = 'field.field.node.utnews_news.field_utnews_main_media';
     if (in_array($config_name, $names)) {
       $allowed_media_bundles = $this->getImageMediaBundles();
-      $overrides[$config_name]['cardinality']['settings']['handler_settings']['target_bundles'] = $allowed_media_bundles;
+      $overrides[$config_name]['settings']['handler_settings']['target_bundles'] = $allowed_media_bundles;
     }
 
     return $overrides;
