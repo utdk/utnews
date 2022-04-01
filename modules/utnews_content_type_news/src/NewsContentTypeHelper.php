@@ -105,29 +105,48 @@ class NewsContentTypeHelper {
    *   A renderable image or FALSE.
    */
   public static function prepareMainImage(Node $node) {
+    // Check if image should be displayed.
     $display_field = 'field_utnews_display_image';
-    if (!$node->hasField($display_field)) {
+    if ($node->hasField($display_field) && $node->$display_field->getString() === 0) {
       return FALSE;
     }
-    if ($node->$display_field->getString() == 0) {
-      return FALSE;
-    }
+
+    // Check for media field.
     $media_field = 'field_utnews_main_media';
     if (!$node->hasField($media_field) || $node->$media_field->isEmpty()) {
       return FALSE;
     }
-    $main_image = $node->get($media_field);
+
+    // Get media item id.
+    /** @var \Drupal\Core\Field\EntityReferenceFieldItemList $field_items_list */
+    $field_items_list = $node->get($media_field);
+    $media_id = $field_items_list->getString();
+
+    // Determine image style.
     // 1x Desktop: 1140x616 pixels (1.85:1 ratio throughout).
     $image_style = 'utexas_responsive_image_hi';
-    if ($media = \Drupal::entityTypeManager()->getStorage('media')->load($main_image->getString())) {
-      $image_render_array = $media->field_utexas_media_image->view([
+
+    // Create render array.
+    /** @var \Drupal\media\MediaStorage $media_storage */
+    $media_storage = \Drupal::entityTypeManager()->getStorage('media');
+    /** @var \Drupal\media\MediaInterface $media */
+    if ($media = $media_storage->load($media_id)) {
+      /** @var  \Drupal\media\MediaSourceInterface $media_source */
+      $media_source = $media->getSource();
+      $media_source_field = $media_source->getConfiguration()['source_field'];
+      if ($media->get($media_source_field)->isEmpty()) {
+        return FALSE;
+      }
+
+      $image_render_array = $media->get($media_source_field)->view([
         'label'    => 'hidden',
         'type'     => 'responsive_image',
         'settings' => [
           'responsive_image_style' => $image_style,
         ],
       ]);
-      return $image_render_array;
+
+      return $image_render_array ?? FALSE;
     }
   }
 
