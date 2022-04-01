@@ -62,6 +62,12 @@ class ConfigOverrider implements ConfigFactoryOverrideInterface {
       $overrides[$config_name]['settings']['handler_settings']['target_bundles'] = $allowed_media_bundles;
     }
 
+    $config_name = 'field.field.taxonomy_term.utnews_authors.field_utnews_author_image';
+    if (in_array($config_name, $names)) {
+      $allowed_media_bundles = $this->getImageMediaBundles();
+      $overrides[$config_name]['settings']['handler_settings']['target_bundles'] = $allowed_media_bundles;
+    }
+
     return $overrides;
   }
 
