@@ -46,13 +46,3 @@ function utnews_update_8101() {
     \Drupal::service('module_installer')->install(['utnews_readonly']);
   }
 }
-
-/**
- * Issue #191: HOTFIX: Allow field_utnews_display_image node field to...
- */
-function utnews_update_8102() {
-  // Enable this add-on's dynamic overrides module.
-  if (\Drupal::moduleHandler()->moduleExists('utnews_overrides') === FALSE) {
-    \Drupal::service('module_installer')->install(['utnews_overrides']);
-  }
-}
