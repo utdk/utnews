@@ -1,6 +1,5 @@
 services:
   utnews_overrides.overrider:
     class: Drupal\utnews_overrides\Config\ConfigOverrider
-    arguments: ['@entity_type.bundle.info', '@entity_type.manager']
     tags:
       - { name: config.factory.override, priority: 10 }
