@@ -107,7 +107,7 @@ class NewsContentTypeHelper {
   public static function prepareMainImage(Node $node) {
     // Check if image should be displayed.
     $display_field = 'field_utnews_display_image';
-    if ($node->hasField($display_field) && $node->$display_field->getString() === 0) {
+    if (!$node->hasField($display_field) || $node->$display_field->getString() === "0") {
       return FALSE;
     }
 
