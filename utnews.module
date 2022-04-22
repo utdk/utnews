@@ -32,3 +32,13 @@ function utnews_node_view(array &$build, EntityInterface $entity, EntityViewDisp
     unset($build['field_utnews_main_media']);
   }
 }
+
+/**
+ * Enable utnews_overrides by default on new & existing sites (#195).
+ */
+function utnews_update_8102() {
+  // Enable this add-ons overrider functionality.
+  if (\Drupal::moduleHandler()->moduleExists('utnews_overrides') === FALSE) {
+    \Drupal::service('module_installer')->install(['utnews_overrides']);
+  }
+}
