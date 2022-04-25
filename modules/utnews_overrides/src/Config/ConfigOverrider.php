@@ -5,50 +5,13 @@ namespace Drupal\utnews_overrides\Config;
 use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Config\ConfigFactoryOverrideInterface;
 use Drupal\Core\Config\StorageInterface;
-use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
+
+use Drupal\media\Entity\MediaType;
 
 /**
  * Configuration override.
  */
 class ConfigOverrider implements ConfigFactoryOverrideInterface {
-
-  /**
-   * The entity type bundle info service.
-   *
-   * @var \Drupal\Core\Entity\EntityTypeBundleInfoInterface
-   */
-  protected $entityTypeBundleInfo;
-
-  /**
-   * The entity type manager service.
-   *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
-   */
-  protected $entityTypeManager;
-
-  /**
-   * The entity type manager service.
-   *
-   * @var \Drupal\Core\Config\Entity\ConfigEntityStorageInterface
-   */
-  protected $mediaTypeStorage;
-
-  /**
-   * Constructs the ConfigOverrider object.
-   *
-   * @param \Drupal\Core\Entity\EntityTypeBundleInfoInterface $entity_type_bundle_info
-   *   The entity type bundle info service.
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
-   *   The entity type manager service.
-   */
-  public function __construct(
-    EntityTypeBundleInfoInterface $entity_type_bundle_info,
-    EntityTypeManagerInterface $entity_type_manager) {
-    $this->entityTypeBundleInfo = $entity_type_bundle_info;
-    $this->entityTypeManager = $entity_type_manager;
-    $this->mediaTypeStorage = $entity_type_manager->getStorage('media_type');
-  }
 
   /**
    * {@inheritdoc}
@@ -79,13 +42,12 @@ class ConfigOverrider implements ConfigFactoryOverrideInterface {
    */
   public function getImageMediaBundles() {
     // Get all available media bundles.
-    $media_bundles = $this->entityTypeBundleInfo->getBundleInfo('media');
-    // Get only media bundles with a source plugin id of 'image'.
-    foreach (array_keys($media_bundles) as $media_bundle_name) {
-      /** @var \Drupal\media\MediaTypeInterface $media_type */
-      $media_type = $this->mediaTypeStorage->load($media_bundle_name);
+    /** @var \Drupal\media\MediaTypeInterface[] $media_bundles */
+    $media_bundles = MediaType::loadMultiple();
 
-      if ($media_type->getSource()->getPluginId() === 'image') {
+    // Get only media bundles with a source plugin id of 'image'.
+    foreach ($media_bundles as $media_bundle_name => $media_bundle) {
+      if ($media_bundle->getSource()->getPluginId() === 'image') {
         $allowed_media_bundles[] = $media_bundle_name;
       }
     }
