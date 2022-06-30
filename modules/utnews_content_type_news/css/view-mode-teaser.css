@@ -1,43 +1,41 @@
 /* Mobile-first styles. */
-.utnews-news h3.ut-headline {
-  margin-bottom: 0;
-  padding-bottom: 0;
+.teaser.utnews-news h3.ut-headline {
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.25;
+  margin-bottom: 8px;
+  padding: 0;
 }
-.utnews-news .utnews__published {
-  margin-bottom: .5rem;
+.teaser.utnews-news .utnews__published {
   display: inline-block;
   font-style: italic;
-  font-size: 14px;
+  font-size: .9rem;
 }
-.teaser .utnews__thumbnail {
-  margin: 10px 0 5px 20px;
+.teaser.utnews-news .utnews__thumbnail {
+  margin: 0 0 0 20px;
   float: right;
   max-width: 140px;
-}
-/* Set /news page images width for small screens. */
-.views-field-utnews-listing-search-api .utnews__thumbnail {
   min-width: 120px;
   width: 33%;
 }
-/* Tablet styling */
-@media screen and (min-width: 600px) {
-  .teaser .utnews__thumbnail {
-    min-width: 112px;
-  }
-  /* Set /news page images width for tablet and desktop screens. */
-  .views-field-utnews-listing-search-api .utnews__thumbnail {
-    width: 190px;
-    max-width: unset;
-  }
-  .teaser.utnews-news .ut-headline {
-    font-size: 1.25rem;
-    line-height: 1.625rem;
-  }
+
+/* Second to last child has bottom margin, unless it is .utnews__thumbnail */
+.teaser.utnews-news > div > :nth-last-child(2):not(.utnews__thumbnail) {
+  margin-bottom: 8px;
 }
 
-/* Desktop styling */
-@media screen and (min-width: 900px) {
-  .teaser.utnews-news .ut-headline {
-    line-height: 1.25rem;
+/* Prevent last element in .ut-copy (nested to 3 levels) from having bottom
+margin. */
+.teaser.utnews-news > div > :last-child,
+.teaser.utnews-news > div > :last-child > :last-child,
+.teaser.utnews-news > div > :last-child > :last-child > :last-child,
+.teaser.utnews-news > div > :last-child > :last-child > :last-child :last-child {
+  margin-bottom: 0;
+}
+
+/* Tablet styling */
+@media screen and (min-width: 600px) {
+  .teaser.utnews-news .utnews__thumbnail {
+    max-width: 190px;
   }
 }

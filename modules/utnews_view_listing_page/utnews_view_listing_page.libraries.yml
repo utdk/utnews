@@ -5,3 +5,8 @@ facet-display:
       css/facet-display.css: {}
   js:
     js/facet.js: {}
+utnews-listing-page:
+  version: VERSION
+  css:
+    layout:
+      css/listing-page.layout.css: {}

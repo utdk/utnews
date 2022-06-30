@@ -1,0 +1,14 @@
+/* Styles for News Listing page views grid*/
+.utnews-listing-page .views-row {
+  border-top: 1px solid #d6d6d6;
+  padding-top: 30px;
+  margin-bottom: 32px;
+}
+.utnews-listing-page .views-row:first-child {
+  border-top: 0px;
+}
+.utnews-listing-page .views-row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
