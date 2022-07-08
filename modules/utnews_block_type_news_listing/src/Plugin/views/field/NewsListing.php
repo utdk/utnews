@@ -18,10 +18,10 @@ class NewsListing extends RenderedEntity {
    */
   public function defineOptions() {
     $options = parent::defineOptions();
-    $options['display_date'] = TRUE;
-    $options['display_summary'] = TRUE;
-    $options['display_thumbnail'] = TRUE;
-    $options['block_id'] = 0;
+    $options['display_date'] = ['default' => TRUE, 'bool' => TRUE];
+    $options['display_summary'] = ['default' => TRUE, 'bool' => TRUE];
+    $options['display_thumbnail'] = ['default' => TRUE, 'bool' => TRUE];
+    $options['block_id'] = ['default' => 0];
     return $options;
   }
 
