@@ -17,7 +17,8 @@ function utnews_readonly_form_alter(array &$form, FormStateInterface &$form_stat
   }
   $form_entity = $form_object->getEntity();
   // Only modify forms that match a predefined pattern.
-  if (!ReadOnlyHelper::matchesReadOnlyPattern($form_entity->id())) {
+  $form_entity_id = $form_entity->id() ?? '';
+  if (!ReadOnlyHelper::matchesReadOnlyPattern($form_entity_id)) {
     return;
   }
   ReadOnlyHelper::warn();
