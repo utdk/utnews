@@ -1,9 +1,8 @@
 /* Mobile-first styles. */
 .teaser.utnews-news h3.ut-headline {
-  font-size: 1.5rem;
-  font-weight: 400;
-  line-height: 1.25;
-  margin-bottom: 8px;
+  /* Reduce space when headline wraps to two lines. */
+  line-height: 1;
+  /* Help with alignment when an image is present. */
   padding: 0;
 }
 .teaser.utnews-news .utnews__published {
