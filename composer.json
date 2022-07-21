@@ -18,11 +18,17 @@
     "drupal/breadcrumbs_visibility": "^1.0",
     "drupal/facets": "1.8.0",
     "drupal/page_title_visibility": "^1.1",
-    "drupal/search_api": "1.23.0",
+    "drupal/search_api": "1.25.0",
     "utexas/utdk_profile": "^3.6.0 || dev-develop"
   },
   "config": {
-    "sort-packages": true
+    "sort-packages": true,
+    "allow-plugins": {
+      "cweagans/composer-patches": true,
+      "drupal/core-composer-scaffold": true,
+      "composer/installers": true,
+      "oomphinc/composer-installers-extender": true
+    }
   },
   "prefer-stable": true
 }
