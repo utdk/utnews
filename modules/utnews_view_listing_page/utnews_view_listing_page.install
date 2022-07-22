@@ -127,3 +127,13 @@ function utnews_view_listing_page_update_8103() {
   $config->set('display_summary', 1)->save(TRUE);
   $config->set('display_date', 1)->save(TRUE);
 }
+
+/**
+ * Issue #162: Add horizontal dividers and improve consistency in vertical...
+ */
+function utnews_view_listing_page_update_8104() {
+  // Import updated configuration to facets.
+  \Drupal::service('features.manager')->import([
+    'utnews_view_listing_page',
+  ], TRUE);
+}
