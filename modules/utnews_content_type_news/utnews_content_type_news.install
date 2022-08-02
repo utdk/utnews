@@ -93,7 +93,7 @@ function _utnews_add_pathauto_pattern() {
       ]);
       $pattern->addSelectionCondition(
         [
-          'id' => 'node_type',
+          'id' => 'entity_bundle:node',
           'bundles' => [
             'utnews_news' => 'utnews_news',
           ],
@@ -262,4 +262,31 @@ function utnews_content_type_news_update_8110() {
   \Drupal::service('features.manager')->import([
     'utnews_content_type_news',
   ], TRUE);
+}
+
+/**
+ * Issue #219: Fatal error with Ctools update to 4.0.1 or 3.10.
+ *
+ * Copy of pathauto update hook 8107.
+ *
+ * @see https://www.drupal.org/project/pathauto/issues/3222776
+ */
+function utnews_content_type_news_update_8111() {
+  // Load all pattern configuration entities.
+  foreach (\Drupal::configFactory()->listAll('pathauto.pattern.') as $pattern_config_name) {
+    $pattern_config = \Drupal::configFactory()->getEditable($pattern_config_name);
+
+    // Loop patterns and swap the node_type plugin by the entity_bundle:node
+    // plugin.
+    if ($pattern_config->get('type') === 'canonical_entities:node') {
+      $selection_criteria = $pattern_config->get('selection_criteria');
+      foreach ($selection_criteria as $uuid => $condition) {
+        if ($condition['id'] === 'node_type') {
+          $pattern_config->set("selection_criteria.$uuid.id", 'entity_bundle:node');
+          $pattern_config->save();
+          break;
+        }
+      }
+    }
+  }
 }
