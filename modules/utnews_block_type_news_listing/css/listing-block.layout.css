@@ -7,6 +7,7 @@
   display: grid;
   grid-gap: var(--ipr-grid-gap);
   grid-template-columns: repeat(auto-fit, minmax(max(var(--ipr-grid-min-min-size), var(--ipr-grid-min-max-size)), 1fr));
+  margin-bottom: 1.5rem;
 }
 
 .utexas-onecol .utnews-listing-block,
