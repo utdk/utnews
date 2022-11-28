@@ -290,3 +290,11 @@ function utnews_content_type_news_update_8111() {
     }
   }
 }
+
+/**
+ * Invalidate existing render cache (#230).
+ */
+function utnews_content_type_news_update_8112() {
+  $render_cache = \Drupal::service('cache.render');
+  $render_cache->invalidateAll();
+}
