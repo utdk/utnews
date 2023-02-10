@@ -2,8 +2,7 @@ name: 'Content Type - News Articles'
 description: 'Provides the "News articles" content type for the "UT News" module.'
 package: 'UT Drupal Kit News Add-on'
 type: module
-core: 8.x
-core_version_requirement: '^8 || ^9'
+core_version_requirement: ^8 || ^9 || ^10
 dependencies:
   - 'drupal:block'
   - 'drupal:breadcrumbs_visibility'
