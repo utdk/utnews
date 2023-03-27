@@ -19,10 +19,12 @@ function utnews_content_type_news_post_update_add_social_sharing_block() {
  * Configure XMLSitemap settings.
  */
 function utnews_content_type_news_post_update_configure_xmlsitemap() {
+  /** @var \Drupal\Core\Extension\ExtensionPathResolver $extension_path_resolver */
+  $extension_path_resolver = \Drupal::service('extension.path.resolver');
   if (\Drupal::moduleHandler()->moduleExists('xmlsitemap') !== FALSE) {
     if (\Drupal::config('xmlsitemap.settings.node.utnews_news')->get('status') === NULL) {
       $config = \Drupal::configFactory()->getEditable('xmlsitemap.settings.node.utnews_news');
-      $config_path = drupal_get_path('module', 'utnews_content_type_news') . '/config/install/xmlsitemap.settings.node.utnews_news.yml';
+      $config_path = $extension_path_resolver->getPath('module', 'utnews_content_type_news') . '/config/install/xmlsitemap.settings.node.utnews_news.yml';
       if (!empty($config_path)) {
         $data = Yaml::parse(file_get_contents($config_path));
         if (is_array($data)) {

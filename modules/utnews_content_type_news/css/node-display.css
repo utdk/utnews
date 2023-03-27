@@ -23,6 +23,9 @@
 .utnews__categories-wrapper h5.field__label {
   margin-bottom: 0;
 }
+.utnews__categories-wrapper .utnews__categories a {
+  display: block;
+}
 .utnews__tags-wrapper h5.field__label {
   margin-bottom: 0;
 }

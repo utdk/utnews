@@ -2,7 +2,7 @@ name: 'View - News Listing Page'
 description: 'Provides the "News" listing page'
 package: 'UT Drupal Kit News Add-on'
 type: module
-core_version_requirement: '^8.9 || ^9'
+core_version_requirement: ^8.9 || ^9 || ^10
 dependencies:
   - 'drupal:block'
   - 'drupal:datetime'
