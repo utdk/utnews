@@ -1,0 +1,5 @@
+name: Run automated tests on pull request
+on:
+  # Triggers the workflow when a new commit is pushed to the HEAD ref of a pull request
+  pull_request:
+    types: [opened, reopened, synchronize]
