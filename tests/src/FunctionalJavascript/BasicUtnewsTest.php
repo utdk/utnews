@@ -140,7 +140,8 @@ class BasicUtnewsTest extends WebDriverTestBase {
     // Access media library.
     $page->pressButton('edit-field-utnews-main-media-open-button');
     // Wait for media library to load.
-    $this->assertNotEmpty($assert->waitForText('Add or Select Media'));
+    sleep(10);
+    $this->assertTrue($assert->waitForText('Add or select media', 20000));
     // Select the test media item ("Image 1" with file name "test-image.png").
     $assert->elementExists('css', 'img[src*="' . $this->testMediaImageFilename . '"]')->click();
     $assert->elementExists('css', '.ui-dialog-buttonset')->pressButton('Insert selected');

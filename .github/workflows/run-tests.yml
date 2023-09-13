@@ -3,3 +3,11 @@ on:
   # Triggers the workflow when a new commit is pushed to the HEAD ref of a pull request
   pull_request:
     types: [opened, reopened, synchronize]
+
+jobs:
+  automated_tests:
+    uses: eis1-wcs/utdk_automation/.github/workflows/test-on-pull-request.yml@main
+    with:
+      repo: ${{ github.event.repository.name }}
+      branch: ${{ github.event.pull_request.head.ref }}
+    secrets: inherit # pass all secrets
