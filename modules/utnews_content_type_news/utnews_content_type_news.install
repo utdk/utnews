@@ -26,6 +26,11 @@ function utnews_content_type_news_install() {
   // if those roles exist.
   Permissions::assignPermissions('editor', 'utexas_content_editor');
   Permissions::assignPermissions('manager', 'utexas_site_manager');
+
+
+  // Add 'Standard workflow' to Event content type (#289).
+  // This function is defined in the utevent_content_type_event.module file.
+  _utnews_content_type_news_add_standard_workflow();
 }
 
 /**
@@ -37,6 +42,9 @@ function utnews_content_type_news_update_dependencies() {
   // 'utexas' prfile.
   $dependencies['utnews_content_type_news'][8109] = [
     'utexas' => 8127,
+  ];
+  $dependencies['utnews_content_type_news'][8113] = [
+    'utexas' => 8150,
   ];
   return $dependencies;
 }
@@ -297,4 +305,14 @@ function utnews_content_type_news_update_8111() {
 function utnews_content_type_news_update_8112() {
   $render_cache = \Drupal::service('cache.render');
   $render_cache->invalidateAll();
+}
+
+/**
+ * Use "Standard workflow" on News nodes #271.
+ */
+function utnews_content_type_news_update_8113() {
+  // This function is defined in the utevent_content_type_event.module file.
+  _utnews_content_type_news_add_standard_workflow();
+  }
+
 }

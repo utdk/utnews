@@ -81,3 +81,22 @@ function utnews_content_type_news_node_view_alter(array &$build, EntityInterface
     $build['#cache']['max-age'] = 0;
   }
 }
+
+/**
+ * Helper function to add the "Standard workflow" to the content type.
+ */
+function _utnews_content_type_news_add_standard_workflow() {
+  // Mutable Config (Read / Write).
+  $config = \Drupal::service('config.factory')->getEditable('workflows.workflow.standard_workflow');
+  if (empty($config)) {
+    // This site does not use the standard_workflow from utdk_profile. Move on.
+    return;
+  }
+  $type_settings = $config->get('type_settings');
+  $new_type_settings = $type_settings;
+  $new_type_settings['entity_types']['node'][] = 'utnews_news';
+  $config->set('type_settings', $new_type_settings);
+  $config->save();
+  // A cache rebuild is required for this configuration change to show.
+  drupal_flush_all_caches();
+}
