@@ -5,11 +5,11 @@
  * News article content type installation file.
  */
 
-use Drupal\pathauto\Entity\PathautoPattern;
-use Drupal\metatag\Entity\MetatagDefaults;
 use Drupal\block\Entity\Block;
-use Drupal\utnews_content_type_news\NewsContentTypeHelper;
+use Drupal\metatag\Entity\MetatagDefaults;
+use Drupal\pathauto\Entity\PathautoPattern;
 use Drupal\utnews\Permissions;
+use Drupal\utnews_content_type_news\NewsContentTypeHelper;
 
 /**
  * Implements hook_install().
@@ -26,7 +26,6 @@ function utnews_content_type_news_install() {
   // if those roles exist.
   Permissions::assignPermissions('editor', 'utexas_content_editor');
   Permissions::assignPermissions('manager', 'utexas_site_manager');
-
 
   // Add 'Standard workflow' to Event content type (#289).
   // This function is defined in the utevent_content_type_event.module file.
@@ -313,6 +312,4 @@ function utnews_content_type_news_update_8112() {
 function utnews_content_type_news_update_8113() {
   // This function is defined in the utevent_content_type_event.module file.
   _utnews_content_type_news_add_standard_workflow();
-  }
-
 }

@@ -5,8 +5,8 @@
  * Contains utnews content type .module file.
  */
 
-use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\EntityInterface;
 
 use Drupal\utnews_content_type_news\NewsContentTypeHelper;
 
