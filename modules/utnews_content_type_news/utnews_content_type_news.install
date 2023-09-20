@@ -27,7 +27,7 @@ function utnews_content_type_news_install() {
   Permissions::assignPermissions('editor', 'utexas_content_editor');
   Permissions::assignPermissions('manager', 'utexas_site_manager');
 
-  // This function is defined in the utevent_content_type_event.module file.
+  // This function is defined in the utnews_content_type_news.module file.
   _utnews_content_type_news_add_standard_workflow();
 }
 
