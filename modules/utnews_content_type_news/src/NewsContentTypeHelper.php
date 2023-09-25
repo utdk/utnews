@@ -3,8 +3,8 @@
 namespace Drupal\utnews_content_type_news;
 
 use Drupal\block\Entity\Block;
-use Drupal\Core\Url;
 use Drupal\Core\Link;
+use Drupal\Core\Url;
 use Drupal\node\Entity\Node;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\utexas_form_elements\UtexasLinkOptionsHelper;
