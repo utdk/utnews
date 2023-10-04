@@ -86,12 +86,14 @@ function utnews_content_type_news_node_view_alter(array &$build, EntityInterface
  * Helper function to add the "Standard workflow" to the content type.
  */
 function _utnews_content_type_news_add_standard_workflow() {
-  // Mutable Config (Read / Write).
-  $config = \Drupal::service('config.factory')->getEditable('workflows.workflow.standard_workflow');
-  if (empty($config)) {
+  $config_id = 'workflows.workflow.standard_workflow';
+  $config = \Drupal::service('config.factory')->getEditable($config_id);
+  if (is_null($config->get('id'))) {
+    \Drupal::logger('utnews_content_type_news')->notice('Standard workflow not found. Skipping...');
     // This site does not use the standard_workflow from utdk_profile. Move on.
     return;
   }
+  \Drupal::logger('utnews_content_type_news')->notice('Standard workflow found. Updating...');
   $type_settings = $config->get('type_settings');
   $new_type_settings = $type_settings;
   $new_type_settings['entity_types']['node'][] = 'utnews_news';
