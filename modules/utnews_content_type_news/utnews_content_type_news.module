@@ -44,7 +44,8 @@ function utnews_content_type_news_preprocess_node(&$variables) {
   $variables['news_tags'] = NewsContentTypeHelper::prepareNewsTaxonomy($node, 'field_utnews_news_tags', 'tags');
   $variables['news_categories'] = NewsContentTypeHelper::prepareNewsTaxonomy($node, 'field_utnews_news_categories', 'categories');
   $variables['linked_title'] = NewsContentTypeHelper::prepareLinkedTitle($node);
-  $variables['body_summary'] = $node->get('field_utnews_body')->getValue()[0]['summary'];
+  $body_field = $node->get('field_utnews_body')->getValue();
+  $variables['body_summary'] = $body_field[0]['summary'] ?? '';
 
   // The Views field handler `NewsListing` can be applied to all view modes and
   // allows for optionally suppressing 3 fields, listed below, based on
