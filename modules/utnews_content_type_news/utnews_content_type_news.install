@@ -131,6 +131,7 @@ function _utnews_add_metatags() {
   }
   $tags = [
     'title' => '[current-page:title] | [site:name]',
+    'description' => '[node:field_utnews_body:summary]',
     'canonical_url' => '[current-page:url]',
     'og_title' => '[current-page:title]',
     'og_description' => '[node:field_utnews_body:summary]',
