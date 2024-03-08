@@ -19,8 +19,10 @@ $COMPOSER_CMD validate --no-check-all
 cp $TOOLING composer.json
 $COMPOSER_CMD install --ignore-platform-reqs
 PHP_EXTENSIONS="php,inc,module,install,profile,yml"
-
-PHP_LIST=$( git diff --name-only develop..$BRANCH -- "*.php" "*.inc" "*.yml" "*.module" "*.install" "*.profile")
+# Limit to where this branch diverged...
+# https://git-scm.com/docs/git-merge-base#_discussion
+TO_MERGE=$(git merge-base develop HEAD)
+PHP_LIST=$( git diff $TO_MERGE --name-only --diff-filter=ACMRX -- "*.php" "*.inc" "*.yml" "*.module" "*.install" "*.profile")
 echo "Changed files:"
 echo $PHP_LIST
 if [ -z "$PHP_LIST" ]; then
