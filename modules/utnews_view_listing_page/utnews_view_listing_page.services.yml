@@ -4,3 +4,8 @@ services:
     public: false
     tags:
       - { name: page_cache_request_policy }
+
+  utnews_view_listing_page.overrider:
+    class: Drupal\utnews_view_listing_page\Config\Overrider
+    tags:
+      - {name: config.factory.override, priority: 5}

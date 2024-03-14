@@ -8,7 +8,6 @@
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\utnews_view_listing_page\Form\ListingPageConfig;
 use Drupal\views\ViewExecutable;
-use Drupal\utnews_content_type_news\NewsContentTypeHelper;
 
 /**
  * Implements hook_form_FORM_ID_alter() for the general config form.
@@ -16,25 +15,6 @@ use Drupal\utnews_content_type_news\NewsContentTypeHelper;
 function utnews_view_listing_page_form_utnews_general_config_alter(&$form, FormStateInterface $form_state, $form_id) {
   // Alter the general config form to include an the listing page title.
   \Drupal::classResolver(ListingPageConfig::class)->alterForm($form, $form_state, $form_id);
-}
-
-/**
- * Implements hook_views_post_render().
- */
-function utnews_view_listing_page_views_post_render(ViewExecutable $view) {
-  // Set the page title based on editor-provided value.
-  $view_id = 'utnews_listing_page';
-  if ($view->id() !== $view_id) {
-    return;
-  }
-  $config = \Drupal::config('utnews_view_listing_page.config');
-  if ($title = $config->get('page_title')) {
-    // Set the view title.
-    $view->setTitle($title);
-    // Set the route title.
-    $route = \Drupal::routeMatch()->getCurrentRouteMatch()->getRouteObject();
-    $route->setDefault('_title', $title);
-  }
 }
 
 /**
