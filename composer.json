@@ -16,7 +16,7 @@
   },
   "require": {
     "drupal/breadcrumbs_visibility": "1.3.0",
-    "drupal/facets": "2.0.6",
+    "drupal/facets": "2.0.7",
     "drupal/page_title_visibility": "1.6.0",
     "drupal/search_api": "1.31.0",
     "utexas/utdk_profile": "^3.16.0 || dev-develop"
