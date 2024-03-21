@@ -1,7 +1,7 @@
 /* Mobile-first styles. */
 .teaser.utnews-news h3.ut-headline {
   /* Reduce space when headline wraps to two lines. */
-  line-height: 1;
+  line-height: 1.5;
   /* Help with alignment when an image is present. */
   padding: 0;
 }
