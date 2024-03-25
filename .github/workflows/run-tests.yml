@@ -1,12 +1,23 @@
-name: Run automated tests on pull request
+name: Run automated checks on pull request
 on:
   # Triggers the workflow when a new commit is pushed to the HEAD ref of a pull request
   pull_request:
     types: [opened, reopened, synchronize]
-
+  # Allows running this workflow manually from the Actions tab
+  workflow_dispatch:
 jobs:
+  checksyntax:
+    runs-on: [ wcs-gh-t01 ]
+    steps:
+      - uses: actions/checkout@v3
+      - name: CHECK SYNTAX
+        uses: eis1-wcs/utdk3-build-action@main
+        env:
+          BRANCH: ${{github.event.pull_request.head.ref}}
+          ENTRYPOINT: .github/workflows/scripts/check_syntax.sh
   automated_tests:
     uses: eis1-wcs/utdk_automation/.github/workflows/test-on-pull-request.yml@main
+    needs: checksyntax
     with:
       repo: ${{ github.event.repository.name }}
       branch: ${{ github.event.pull_request.head.ref }}

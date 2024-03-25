@@ -8,7 +8,6 @@ use Drupal\file\Entity\File;
 use Drupal\media\Entity\Media;
 use Drupal\node\Entity\Node;
 use Drupal\taxonomy\Entity\Term;
-use Drupal\utnews_demo_content\DemoData;
 
 /**
  * Generate curated demo content.
@@ -85,7 +84,7 @@ class DemoContent {
       }
       $node->set($field, $tids);
     }
-    if ($item['field_utnews_featured']['value']) {
+    if (isset($item['field_utnews_display_image']['value']) && $item['field_utnews_display_image']['value'] === TRUE) {
       $node->set('field_utnews_main_media', $media_id);
     }
     $node->status = 1;

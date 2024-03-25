@@ -161,17 +161,19 @@ class BasicUtnewsTest extends WebDriverTestBase {
     // Create the node.
     $page->pressButton('Save');
 
-    // View as an anonymous user so that the screenshot doesn't include
-    // transient usernames.
+    // View as an anonymous user.
     $this->drupalLogout();
     $this->drupalGet('/news/test-news-1');
-    sleep(10);
-    $this->assertNotEmpty($assert->waitForElement('css', '.field--name-field-utexas-media-image'));
-    $screenshot1 = '1-node-view.png';
-    $this->createScreenshot($screenshot1);
-    // Perform a visual regression test of the node display.
-    // (The screenshot generated during the test run will be in the web/ dir).
-    $this->assertTrue($this->filesAreEqual($utnews . '/tests/fixtures/' . $screenshot1, getcwd() . '/' . $screenshot1), "The screenshot in web/$screenshot1 should match the baseline in tests/fixtures/$screenshot1");
+
+    $assert->elementTextEquals('css', 'h1', 'Test News 1');
+    $assert->elementTextEquals('css', '.utnews__author-wrapper', 'By Demo Author 1');
+    $assert->elementTextEquals('css', '.utnews__published-wrapper', 'Published: July 31, 2023');
+    $assert->elementTextEquals('css', '.utnews__categories-wrapper', 'News category: Press Releases');
+    $assert->elementTextEquals('css', '.utnews__tags-wrapper', 'News tags: Demo Tag 1');
+    $this->assertEquals('<p>Pellentesque tristique senectus <strong>et netus</strong> et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p><ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li><li>Aliquam tincidunt mauris eu risus.</li><li>Vestibulum auctor dapibus neque.</li></ul>', $page->find('css', '.field--name-field-utnews-body')->getHTML());
+    $this->assertNotEmpty($assert->waitForElementVisible('css', '.field--name-field-utexas-media-image'), 'The news node should display an image.');
+    $assert->elementTextEquals('css', '.utnews__author-information-wrapper h3', 'About Demo Author 1');
+    $this->assertNotEmpty($assert->waitForElementVisible('css', '.utnews__author-information-wrapper .field--name-field-utexas-media-image'));
 
     // Set the news article to an external link and save the node.
     $this->drupalLogin($this->user);
@@ -181,25 +183,23 @@ class BasicUtnewsTest extends WebDriverTestBase {
     // Save the new changes.
     $page->pressButton('Save');
     $this->drupalLogout();
-    $this->drupalGet('/news/test-news-1');
-    sleep(10);
-    $this->assertNotEmpty($assert->waitForElement('css', '.field--name-field-utexas-media-image'));
-    $screenshot2 = '2-node-edited-view.png';
-    $this->createScreenshot($screenshot2);
-    // Perform a visual regression test of the node display.
-    // (The screenshot generated during the test run will be in the web/ dir).
-    $this->assertTrue($this->filesAreEqual($utnews . '/tests/fixtures/' . $screenshot2, getcwd() . '/' . $screenshot2), "The screenshot in web/$screenshot2 should match the baseline in tests/fixtures/$screenshot2");
 
-    // Perform a visual regression test of /news (the listing page),
+    // Perform a test of /news (the listing page),
     // Confirming that the external link icon is present.
     $this->drupalGet('/news');
-    // Wait for image derivative to be generated.
-    sleep(10);
-    $this->assertNotEmpty($assert->waitForElement('css', '.field--name-field-utnews-main-media img'));
-    $screenshot3 = '3-news-listing.png';
-    $this->createScreenshot($screenshot3);
-    // (The screenshot generated during the test run will be in the web/ dir).
-    $this->assertTrue($this->filesAreEqual($utnews . '/tests/fixtures/' . $screenshot3, getcwd() . '/' . $screenshot3), "The screenshot in web/$screenshot3 should match the baseline in tests/fixtures/$screenshot3");
+    $assert->elementTextEquals('css', 'h1', 'News');
+    $assert->elementTextEquals('css', '.utnews__content-wrapper h3', 'Test News 1');
+    $this->assertEquals('<a href="https://news.utexas.edu" class="ut-cta-link--external">Test News 1</a>', $page->find('css', '.utnews__content-wrapper h3')->getHTML(), 'An news article with an external link links to the external link.');
+    $this->assertNotEmpty($assert->waitForElementVisible('css', '.utnews__content-wrapper .field--name-field-utnews-main-media'), 'The news teaser should display an image.');
+    $assert->linkByHrefExists('https://news.utexas.edu', 0, 'The news title links to an external URL.');
+    $assert->elementTextEquals('css', '.field--name-field-utnews-publication-date', 'July 31, 2023');
+    $assert->elementTextEquals('css', '.field--name-field-utnews-body', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.');
+    $assert->pageTextContains('Filter by News Category');
+    $assert->pageTextContains('Press Releases (1)');
+    $assert->pageTextContains('Filter by Tag');
+    $assert->pageTextContains('Demo Tag 1 (1)');
+    $assert->pageTextContains('Filter by Author');
+    $assert->pageTextContains('Demo Author 1 (1)');
 
     // Confirm that a News node can be deleted from the system via user
     // actions.

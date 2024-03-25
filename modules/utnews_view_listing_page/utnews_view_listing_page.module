@@ -8,20 +8,6 @@
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\utnews_view_listing_page\Form\ListingPageConfig;
 use Drupal\views\ViewExecutable;
-use Drupal\utnews_content_type_news\NewsContentTypeHelper;
-
-/**
- * Implements hook_theme().
- */
-function utnews_view_listing_page_theme() {
-  // Provide News listing-specific page template.
-  $theme['page__news'] = [
-    'template' => 'page--news',
-    'base hook' => 'page',
-  ];
-
-  return $theme;
-}
 
 /**
  * Implements hook_form_FORM_ID_alter() for the general config form.
@@ -29,25 +15,6 @@ function utnews_view_listing_page_theme() {
 function utnews_view_listing_page_form_utnews_general_config_alter(&$form, FormStateInterface $form_state, $form_id) {
   // Alter the general config form to include an the listing page title.
   \Drupal::classResolver(ListingPageConfig::class)->alterForm($form, $form_state, $form_id);
-}
-
-/**
- * Implements hook_views_post_render().
- */
-function utnews_view_listing_page_views_post_render(ViewExecutable $view) {
-  // Set the page title based on editor-provided value.
-  $view_id = 'utnews_listing_page';
-  if ($view->id() !== $view_id) {
-    return;
-  }
-  $config = \Drupal::config('utnews_view_listing_page.config');
-  if ($title = $config->get('page_title')) {
-    // Set the view title.
-    $view->setTitle($title);
-    // Set the route title.
-    $route = \Drupal::routeMatch()->getCurrentRouteMatch()->getRouteObject();
-    $route->setDefault('_title', $title);
-  }
 }
 
 /**
@@ -69,6 +36,7 @@ function utnews_view_listing_page_preprocess_page__news(&$variables) {
   $variables['attributes']['class'][] = 'utexas-field-border';
   $variables['attributes']['class'][] = 'utexas-field-background';
   $variables['#attached']['library'][] = 'utnews_view_listing_page/facet-display';
+  $variables['page']['sidebar_first_width'] = 'col-md-4';
 }
 
 /**
