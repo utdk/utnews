@@ -19,7 +19,7 @@
     "drupal/facets": "2.0.7",
     "drupal/page_title_visibility": "1.6.0",
     "drupal/search_api": "1.34.0",
-    "utexas/utdk_profile": "^3.17.0 || dev-develop"
+    "utexas/utdk_profile": "^3.18.0 || dev-develop"
   },
   "config": {
     "sort-packages": true,
