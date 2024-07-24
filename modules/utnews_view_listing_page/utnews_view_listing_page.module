@@ -35,7 +35,6 @@ function utnews_view_listing_page_preprocess_page__news(&$variables) {
   // Styling variables.
   $variables['attributes']['class'][] = 'utexas-field-border';
   $variables['attributes']['class'][] = 'utexas-field-background';
-  $variables['#attached']['library'][] = 'utnews_view_listing_page/facet-display';
   $variables['page']['sidebar_first_width'] = 'col-md-4';
 }
 

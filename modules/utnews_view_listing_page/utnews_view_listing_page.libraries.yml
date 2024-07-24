@@ -1,9 +1,3 @@
-facet-display:
-  css:
-    theme:
-      css/facet-display.css: {}
-  js:
-    js/facet.js: {}
 utnews-listing-page:
   css:
     layout:
