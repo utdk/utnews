@@ -95,7 +95,7 @@ function _utnews_add_pathauto_pattern() {
         'label' => 'Pathauto : News article content type',
         'type' => 'canonical_entities:node',
         'pattern' => '/news/[node:title]',
-        'weight' => _setNewsPatternWeightBeforeGeneric(),
+        'weight' => _set_news_pattern_weight_before_generic(),
       ]);
       $pattern->addSelectionCondition(
         [
@@ -172,7 +172,7 @@ function _utnews_delete_metatags() {
  * @return string
  *   The weight of the custom pathauto pattern.
  */
-function _setNewsPatternWeightBeforeGeneric() {
+function _set_news_pattern_weight_before_generic() {
   // Default to -10 in case there is a generic pattern.
   $weight = -10;
   // If generic pattern present, place it 1 level above.
@@ -187,7 +187,7 @@ function _setNewsPatternWeightBeforeGeneric() {
  */
 function utnews_content_type_news_update_8101() {
   $pattern = PathautoPattern::load('utnews_news');
-  $pattern->set('weight', _setNewsPatternWeightBeforeGeneric())->save();
+  $pattern->set('weight', _set_news_pattern_weight_before_generic())->save();
 }
 
 /**
@@ -312,4 +312,13 @@ function utnews_content_type_news_update_8112() {
 function utnews_content_type_news_update_8113() {
   // This function is defined in the utnews_content_type_news.module file.
   _utnews_content_type_news_add_standard_workflow();
+}
+
+/**
+ * Issue #233: Convert News teaser variations to separate view modes.
+ */
+function utnews_content_type_news_update_8114() {
+  \Drupal::service('features.manager')->import([
+    'utnews_content_type_news',
+  ], TRUE);
 }

@@ -66,6 +66,12 @@ function utnews_block_type_news_listing_preprocess_block(&$variables) {
 function utnews_block_type_news_listing_plugin_filter_block__layout_builder_alter(array &$definitions) {
   // The News Listing view block is not intended to be placed on its own,
   // but rather via the News listing block type.
-  unset($definitions['views_block:utnews_listing_block-block_1']);
+  unset($definitions['views_block:utnews_listing_block-teaser']);
+  unset($definitions['views_block:utnews_listing_block-utnews_date_image']);
+  unset($definitions['views_block:utnews_listing_block-utnews_image']);
+  unset($definitions['views_block:utnews_listing_block-utnews_summary']);
+  unset($definitions['views_block:utnews_listing_block-utnews_date']);
+  unset($definitions['views_block:utnews_listing_block-utnews_summary_image']);
+  unset($definitions['views_block:utnews_listing_block-utnews_summary_date']);
+  unset($definitions['views_block:utnews_listing_block-utnews_summary_image_date']);
 }
-

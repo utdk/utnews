@@ -5,9 +5,6 @@
  * Contains utnews content type .module file.
  */
 
-use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
-use Drupal\Core\Entity\EntityInterface;
-
 use Drupal\utnews_content_type_news\NewsContentTypeHelper;
 
 /**
@@ -19,8 +16,8 @@ function utnews_content_type_news_theme() {
       'template' => 'node--utnews-news--full',
       'base hook' => 'node',
     ],
-    'node__utnews_news__teaser' => [
-      'template' => 'node--utnews-news--teaser',
+    'node__utnews_news' => [
+      'template' => 'node--utnews-news',
       'base hook' => 'node',
     ],
   ];
@@ -66,20 +63,9 @@ function utnews_content_type_news_preprocess_node(&$variables) {
       $variables['#attached']['library'][] = 'utnews_content_type_news/node-display';
       break;
 
-    case 'teaser':
+    default:
       $variables['#attached']['library'][] = 'utnews_content_type_news/view-mode-teaser';
       break;
-  }
-}
-
-/**
- * Implements hook_node_view_alter().
- */
-function utnews_content_type_news_node_view_alter(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display) {
-  // Bypass render cache for News teasers, since we build their content
-  // dynamically. See utnews/issues/230.
-  if ($entity->bundle() == 'utnews_news' && $build['#view_mode'] == 'teaser') {
-    $build['#cache']['max-age'] = 0;
   }
 }
 

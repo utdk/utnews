@@ -3,8 +3,8 @@
 namespace Drupal\utnews_block_type_news_listing;
 
 use Drupal\block_content\Entity\BlockContent;
-use Drupal\views\Views;
 use Drupal\utexas_form_elements\UtexasLinkOptionsHelper;
+use Drupal\views\Views;
 
 /**
  * Business logic for rendering the listing view.
@@ -79,27 +79,37 @@ class NewsListingHelper {
    *   A render array.
    */
   public static function buildContextualView(BlockContent $block_content) {
-    $news_listing_view_display = 'block_1';
     $user_defined_filters = self::generateFilters($block_content);
     $view = Views::getView('utnews_listing_block');
     if (is_object($view)) {
-      // Specify which Views display to use.
-      $view->setDisplay($news_listing_view_display);
-      // Dynamically set date, summary, & thumbnail displays from block fields.
-      $news_listing_field = $view->getHandler($news_listing_view_display, 'field', 'utnews_listing');
+      // Get date, summary, & thumbnail displays from block fields.
       if ($block_content->hasField('field_utnews_display_summaries')) {
         $display = $block_content->get('field_utnews_display_summaries')->getValue()[0]['value'];
-        $news_listing_field['display_summary'] = $display;
+        $summary = $display;
       }
       if ($block_content->hasField('field_utnews_display_dates')) {
         $display = $block_content->get('field_utnews_display_dates')->getValue()[0]['value'];
-        $news_listing_field['display_date'] = $display;
+        $date = $display;
       }
       if ($block_content->hasField('field_utnews_display_thumbnails')) {
         $display = $block_content->get('field_utnews_display_thumbnails')->getValue()[0]['value'];
-        $news_listing_field['display_thumbnail'] = $display;
+        $image = $display;
       }
-      $view->setHandler($news_listing_view_display, 'field', 'utnews_listing', $news_listing_field);
+      $matrix = (string) $date . (string) $summary . (string) $image;
+      // 000 = no date, summary, or image (i.e., title only).
+      // 111 = date, summary, and image, etc.
+      $view_mode_map = [
+        '000' => 'teaser',
+        '001' => 'utnews_image',
+        '010' => 'utnews_summary',
+        '100' => 'utnews_date',
+        '011' => 'utnews_summary_image',
+        '110' => 'utnews_summary_date',
+        '101' => 'utnews_date_image',
+        '111' => 'utnews_summary_image_date',
+      ];
+      $news_listing_view_display = $view_mode_map[$matrix];
+      $view->setDisplay($news_listing_view_display);
       // Set filters based on user-provided values.
       $filters = $view->display_handler->getOption('filters');
       foreach ($user_defined_filters as $field => $values) {
