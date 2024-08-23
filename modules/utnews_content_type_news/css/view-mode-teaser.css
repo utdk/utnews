@@ -1,17 +1,11 @@
 /* Mobile-first styles. */
-.utnews--teaser-variation.utnews-news h3.ut-headline {
-  /* Reduce space when headline wraps to two lines. */
-  line-height: 1;
-  /* Help with alignment when an image is present. */
-  padding: 0;
-}
 .utnews--teaser-variation.utnews-news .utnews__published {
   display: inline-block;
   font-style: italic;
   font-size: .9rem;
 }
 .utnews--teaser-variation.utnews-news .utnews__thumbnail {
-  margin: 0 0 0 20px;
+  margin: 1rem 0 0 20px;
   float: right;
   max-width: 140px;
   min-width: 120px;

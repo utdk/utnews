@@ -38,16 +38,16 @@
   border: 1px solid #f2f1ed;
   display: flex;
   margin-bottom: 1.25rem;
-  padding: 1.25rem;
+  padding: 0.25rem 1.25rem 1.25rem 1.25rem;
   order: 3;
 }
+.utnews__author-information-wrapper .utnews__image {
+  padding-top: 1rem;
+}
+
 .utnews__image {
   margin-right: 1.25rem;
   min-width: 140px;
-}
-.utnews__author-information-wrapper .ut-headline {
-  padding-top: 0;
-  margin-bottom: 0;
 }
 .utnews__description-wrapper p {
   margin-bottom: 0;
