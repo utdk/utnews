@@ -1,4 +1,5 @@
 /* UTNEWS full node content styling. */
+
 /* Mobile styling. */
 .utnews__wrapper {
   display: flex;
@@ -36,7 +37,7 @@
 .utnews__author-information-wrapper {
   background-color: #f9fafb;
   border: 1px solid #f2f1ed;
-  display: flex;
+  display: block;
   margin-bottom: 1.25rem;
   padding: 0.25rem 1.25rem 1.25rem 1.25rem;
   order: 3;
@@ -46,6 +47,7 @@
 }
 
 .utnews__image {
+  float: left;
   margin-right: 1.25rem;
   min-width: 140px;
 }
@@ -54,6 +56,14 @@
 }
 .utnews__external-link-wrapper *{
   display: inline;
+}
+/* Mobile styling. */
+@media only screen and (min-width: 600px) {
+  .utnews__author-information-wrapper {
+      display: flex;
+      flex: 0 0 72%;
+      order: 3;
+  }
 }
 /* Tablet and desktop styling. */
 @media only screen and (min-width: 900px ) {
@@ -68,10 +78,6 @@
   }
   .utnews__left-col {
     flex: 0 0 72%;
-  }
-  .utnews__author-information-wrapper {
-    flex: 0 0 72%;
-    order: 3;
   }
   /* Layout with no sidebar. */
   .utnews__wrapper-no-sidebar .utnews__left-col-no-sidebar {
