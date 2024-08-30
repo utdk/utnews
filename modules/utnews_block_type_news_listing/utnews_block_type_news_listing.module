@@ -54,7 +54,6 @@ function utnews_block_type_news_listing_preprocess_block(&$variables) {
 
       if ($listing = NewsListingHelper::buildContextualView($content['#block_content'])) {
         $variables['listing'] = $listing;
-        $variables['#attached']['library'][] = 'utnews_block_type_news_listing/utnews-listing-block';
       }
     }
   }

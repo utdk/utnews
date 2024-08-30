@@ -1,8 +1,0 @@
-node-display:
-  css:
-    theme:
-      css/node-display.css: {}
-view-mode-teaser:
-  css:
-    theme:
-      css/view-mode-teaser.css: {}

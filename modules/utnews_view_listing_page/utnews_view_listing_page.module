@@ -23,7 +23,6 @@ function utnews_view_listing_page_form_utnews_general_config_alter(&$form, FormS
 function utnews_view_listing_page_views_pre_render(ViewExecutable $view) {
   $view_id = 'utnews_listing_page';
   if ($view->storage->id() === $view_id) {
-    $view->element['#attached']['library'][] = 'utnews_view_listing_page/utnews-listing-page';
     $view->element['#attached']['library'][] = 'utexas_layout_builder_styles/border-styles';
   }
 }
