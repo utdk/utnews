@@ -5,34 +5,6 @@
  * Contains base UT News module file.
  */
 
-use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
-use Drupal\Core\Entity\EntityInterface;
-
-/**
- * Implements hook_ENTITY_TYPE_view().
- */
-function utnews_node_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
-  // The 'teaser' view mode shipped by the News add-on includes logic to
-  // dynamically display date, summary, and media when used with the
-  // `utnews_listing` Views field handler. If you want to use this views field
-  // handler with other view modes, use the logic, below, along with
-  // `node--utnews-news--teaser.html.twig`, which explicitly renders those
-  // fields individually, as a model.
-  if ($entity->bundle() !== 'utnews_news') {
-    return;
-  }
-
-  if (isset($build['#display_date']) && !$build['#display_date']) {
-    unset($build['field_utnews_publication_date']);
-  }
-  if (isset($build['#display_summary']) && !$build['#display_summary']) {
-    unset($build['field_utnews_body']);
-  }
-  if (isset($build['#display_thumbnail']) && !$build['#display_thumbnail']) {
-    unset($build['field_utnews_main_media']);
-  }
-}
-
 /**
  * Enable utnews_overrides by default on new & existing sites (#195).
  */

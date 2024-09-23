@@ -23,7 +23,6 @@ function utnews_view_listing_page_form_utnews_general_config_alter(&$form, FormS
 function utnews_view_listing_page_views_pre_render(ViewExecutable $view) {
   $view_id = 'utnews_listing_page';
   if ($view->storage->id() === $view_id) {
-    $view->element['#attached']['library'][] = 'utnews_view_listing_page/utnews-listing-page';
     $view->element['#attached']['library'][] = 'utexas_layout_builder_styles/border-styles';
   }
 }
@@ -35,7 +34,6 @@ function utnews_view_listing_page_preprocess_page__news(&$variables) {
   // Styling variables.
   $variables['attributes']['class'][] = 'utexas-field-border';
   $variables['attributes']['class'][] = 'utexas-field-background';
-  $variables['#attached']['library'][] = 'utnews_view_listing_page/facet-display';
   $variables['page']['sidebar_first_width'] = 'col-md-4';
 }
 

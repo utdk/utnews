@@ -84,3 +84,12 @@ function utnews_block_type_news_listing_update_8104() {
     'utnews_block_type_news_listing',
   ], TRUE);
 }
+
+/**
+ * Issue #233: Convert News teaser variations to separate view modes.
+ */
+function utnews_block_type_news_listing_update_8105() {
+  \Drupal::service('features.manager')->import([
+    'utnews_block_type_news_listing',
+  ], TRUE);
+}
