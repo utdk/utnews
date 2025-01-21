@@ -18,7 +18,7 @@
     "drupal/breadcrumbs_visibility": "2.0.0",
     "drupal/facets": "2.0.9",
     "drupal/page_title_visibility": "2.0.0",
-    "drupal/search_api": "1.36.0",
+    "drupal/search_api": "1.37.0",
     "utexas/utdk_profile": "^3.21.0 || dev-develop"
   },
   "config": {
