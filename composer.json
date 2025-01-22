@@ -18,8 +18,8 @@
     "drupal/breadcrumbs_visibility": "2.0.0",
     "drupal/facets": "2.0.9",
     "drupal/page_title_visibility": "2.0.0",
-    "drupal/search_api": "1.36.0",
-    "utexas/utdk_profile": "^3.21.0 || dev-develop"
+    "drupal/search_api": "1.37.0",
+    "utexas/utdk_profile": "^3.22.0 || dev-develop"
   },
   "config": {
     "sort-packages": true,
@@ -28,6 +28,13 @@
       "drupal/core-composer-scaffold": true,
       "composer/installers": true,
       "oomphinc/composer-installers-extender": true
+    }
+  },
+  "extra": {
+    "patches": {
+      "drupal/facets": {
+        "Facets Spider Trap: Render facets checkboxes without relying on hyperlinks": "https://wcms.its.utexas.edu/patches/48-facets-2937191-3.patch"
+      }
     }
   },
   "prefer-stable": true
