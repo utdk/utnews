@@ -30,12 +30,5 @@
       "oomphinc/composer-installers-extender": true
     }
   },
-  "extra": {
-    "patches": {
-      "drupal/facets": {
-        "Facets Spider Trap: Render facets checkboxes without relying on hyperlinks": "https://wcms.its.utexas.edu/patches/48-facets-2937191-3.patch"
-      }
-    }
-  },
   "prefer-stable": true
 }
