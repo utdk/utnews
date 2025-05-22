@@ -122,7 +122,7 @@ class ReadOnlyHelper {
    * Print a warning message about the add-on read-only status.
    */
   public static function warn() {
-    \Drupal::messenger()->addWarning(t('The News add-on is read-only and may not be changed. Developers who want to customize this add-on should first read <a href="https://drupalkit.its.utexas.edu/docs/addons/#special-cases-add-ons-as-starter-code">https://drupalkit.its.utexas.edu/docs/addons/#special-cases-add-ons-as-starter-code</a>.'));
+    \Drupal::messenger()->addWarning(t('The News add-on is read-only and may not be changed. Developers who want to customize this add-on should first read <a href="https://drupalkit.its.utexas.edu/docs/development/addons.html#maintaining-and-extending-add-ons">https://drupalkit.its.utexas.edu/docs/development/addons.html#maintaining-and-extending-add-ons</a>.'));
   }
 
   /**

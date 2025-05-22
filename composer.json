@@ -16,10 +16,10 @@
   },
   "require": {
     "drupal/breadcrumbs_visibility": "2.0.0",
-    "drupal/facets": "2.0.9",
+    "drupal/facets": "3.0.0",
     "drupal/page_title_visibility": "2.0.0",
-    "drupal/search_api": "1.37.0",
-    "utexas/utdk_profile": "^3.23.0 || dev-develop"
+    "drupal/search_api": "1.38.0",
+    "utexas/utdk_profile": "^3.24.0 || dev-develop"
   },
   "config": {
     "sort-packages": true,

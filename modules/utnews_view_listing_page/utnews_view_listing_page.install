@@ -137,3 +137,13 @@ function utnews_view_listing_page_update_8104() {
     'utnews_view_listing_page',
   ], TRUE);
 }
+
+/**
+ * Date-only based News listing pagination has inconsistent sorting (#352).
+ */
+function utnews_view_listing_page_update_8105() {
+  // Import updated configuration to facets.
+  \Drupal::service('features.manager')->import([
+    'utnews_view_listing_page',
+  ], TRUE);
+}
