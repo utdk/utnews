@@ -11,7 +11,7 @@ env:
   TRIGGER: ${{ github.event_name }}
 jobs:
   build:
-    runs-on: [ wcs-gh-p02-group ]
+    runs-on: [ wcs-gh-t01 ]
     steps:
       - uses: actions/checkout@v3
       - name: SYNC TO GITHUB.COM

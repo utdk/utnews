@@ -1,0 +1,26 @@
+name: Cleanup files/permissions from previous runs
+
+on:
+  # Allows running this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  automated_tests:
+    runs-on: [ wcs-gh-p02-group ]
+    name: Cleanup
+    services:
+      web:
+        image: php:8.1.16-apache
+        volumes:
+        - "${{ github.workspace }}:/var/www/html"
+        env:
+          SIMPLETEST_BASE_URL: http://web:8080
+          SIMPLETEST_DB: mysql://root:utdkftw@utdk_mysql/utdk
+          BROWSERTEST_OUTPUT_DIRECTORY: /var/www/html/utdk_scaffold/web/sites/simpletest/browser_output
+          SYMFONY_DEPRECATIONS_HELPER: disabled
+        ports:
+        - 8080:80
+    steps:
+       - name: 'Cleanup'
+         run: |
+          docker exec ${{ job.services.web.id }} sh -c "pwd && ls -al"
