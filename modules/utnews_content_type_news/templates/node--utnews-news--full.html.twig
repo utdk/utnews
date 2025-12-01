@@ -33,7 +33,6 @@
 
     {% if content.field_utnews_publication_date|render is not empty %}
       <div class="utnews__published-wrapper">
-        <span class="field__label">Published: </span>
         <span class="utnews__published">{{ content.field_utnews_publication_date }}</span>
       </div>
     {% endif %}
@@ -63,7 +62,7 @@
       <div class="utnews__right-col col-lg-4">
         {% if news_categories %}
           <div class="utnews__categories-wrapper mb-3">
-            <h5 class="field__label">News category: </h5>
+            <h5 class="field__label">News category</h5>
             <span class="utnews__categories">
               {% for category in news_categories %}
                 <div>{{ category }}</div>
@@ -74,7 +73,7 @@
 
         {% if news_tags %}
           <div class="utnews__tags-wrapper">
-            <h5 class="field__label">News tags: </h5>
+            <h5 class="field__label">News tags</h5>
             <span class="utnews__tags">
               {% for tag in news_tags %}
                 <div class="utnews__tag">{{ tag }}</div>
