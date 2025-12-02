@@ -2,18 +2,17 @@
 
 namespace Drupal\Tests\utnews\FunctionalJavascript;
 
-use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
-
 use Drupal\Core\Language\Language;
 use Drupal\file\Entity\File;
 use Drupal\file\FileInterface;
+use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
 use Drupal\media\Entity\Media;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\Tests\ckeditor5\Traits\CKEditor5TestTrait;
-use Drupal\Tests\TestFileCreationTrait;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
-use Drupal\utnews\Permissions as UtnewsPermissions;
+use Drupal\Tests\TestFileCreationTrait;
 use Drupal\utexas\Permissions as UtexasPermissions;
+use Drupal\utnews\Permissions as UtnewsPermissions;
 
 /**
  * Test all aspects of News CRUD functionality.
@@ -34,11 +33,32 @@ class BasicUtnewsTest extends WebDriverTestBase {
   protected $profile = 'utexas';
 
   /**
+   * The test media ID.
+   *
+   * @var int
+   */
+  protected $testMediaImageId = 0;
+
+  /**
+   * The test media filename.
+   *
+   * @var string
+   */
+  protected $testMediaImageFilename = "";
+
+  /**
+   * A user with permissions to administer news.
+   *
+   * @var \Drupal\user\UserInterface
+   */
+  protected $user;
+
+  /**
    * Tests must specify what theme will be used.
    *
    * @var string
    */
-  protected $defaultTheme = 'forty_acres';
+  protected $defaultTheme = 'speedway';
 
   /**
    * Modules to enable.
@@ -64,10 +84,9 @@ class BasicUtnewsTest extends WebDriverTestBase {
     $this->strictConfigSchema = NULL;
     parent::setUp();
     // Create a test media item.
-    $this->testMediaImageId = $this->createTestMediaImage();
-    $this->entityTypeManager = $this->container->get('entity_type.manager');
-    $this->testMediaImageFilename = $this->entityTypeManager->getStorage('media')
-      ->load($this->testMediaImageId)->get('field_utexas_media_image')->entity->getFileName();
+    $media = $this->createTestMediaImage();
+    $this->testMediaImageId = $media['id'];
+    $this->testMediaImageFilename = $media['filename'];
     // Create a content editor user with all necessary permissions.
     $this->user = $this->drupalCreateUser();
     $this->user->addRole('utexas_content_editor');
@@ -125,7 +144,6 @@ class BasicUtnewsTest extends WebDriverTestBase {
     $this->getSession()->resizeWindow(1200, 3000);
     $page = $this->getSession()->getPage();
     $assert = $this->assertSession();
-    $utnews = \Drupal::service('extension.list.module')->getPath('utnews');
 
     // Sign in as our user with the necessary permissions.
     $this->drupalLogin($this->user);
@@ -172,7 +190,7 @@ class BasicUtnewsTest extends WebDriverTestBase {
     $assert->elementTextEquals('css', '.utnews__tags-wrapper', 'News tags Demo Tag 1');
     $this->assertEquals('<p>Pellentesque tristique senectus <strong>et netus</strong> et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p><ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li><li>Aliquam tincidunt mauris eu risus.</li><li>Vestibulum auctor dapibus neque.</li></ul>', $page->find('css', '.field--name-field-utnews-body')->getHTML());
     $this->assertNotEmpty($assert->waitForElementVisible('css', '.field--name-field-utexas-media-image'), 'The news node should display an image.');
-    $assert->elementTextEquals('css', '.utnews__author-information-wrapper h3', 'About Demo Author 1');
+    $assert->elementTextEquals('css', '.utnews__author-information-wrapper h3', 'Demo Author 1');
     $this->assertNotEmpty($assert->waitForElementVisible('css', '.utnews__author-information-wrapper .field--name-field-utexas-media-image'));
 
     // Set the news article to an external link and save the node.
@@ -189,7 +207,7 @@ class BasicUtnewsTest extends WebDriverTestBase {
     $this->drupalGet('/news');
     $assert->elementTextEquals('css', 'h1', 'News');
     $assert->elementTextEquals('css', '.utnews__content-wrapper h3', 'Test News 1');
-    $this->assertEquals('<a href="https://news.utexas.edu" class="ut-cta-link--external">Test News 1</a>', $page->find('css', '.utnews__content-wrapper h3')->getHTML(), 'An news article with an external link links to the external link.');
+    $this->assertEquals('<a href="https://news.utexas.edu" class="ut-cta-link--external" data-once="link" aria-label="Test News 1; external link">Test News 1</a>', $page->find('css', '.utnews__content-wrapper h3')->getHTML(), 'An news article with an external link links to the external link.');
     $this->assertNotEmpty($assert->waitForElementVisible('css', '.utnews__content-wrapper .field--name-field-utnews-main-media'), 'The news teaser should display an image.');
     $assert->linkByHrefExists('https://news.utexas.edu', 0, 'The news title links to an external URL.');
     $assert->elementTextEquals('css', '.field--name-field-utnews-publication-date', 'July 31, 2023');
@@ -256,7 +274,7 @@ class BasicUtnewsTest extends WebDriverTestBase {
       'status' => FileInterface::STATUS_PERMANENT,
     ]);
     $file->save();
-    $image_media = Media::create([
+    $media = Media::create([
       'name' => 'Image 1',
       'bundle' => 'utexas_image',
       'uid' => '1',
@@ -268,8 +286,11 @@ class BasicUtnewsTest extends WebDriverTestBase {
         'title' => 'Test Title Text',
       ],
     ]);
-    $image_media->save();
-    return $image_media->id();
+    $media->save();
+    return [
+      'id' => $media->id(),
+      'filename' => $file->getFilename(),
+    ];
   }
 
   /**
