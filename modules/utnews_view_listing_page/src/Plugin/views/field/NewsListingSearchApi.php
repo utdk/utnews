@@ -2,14 +2,14 @@
 
 namespace Drupal\utnews_view_listing_page\Plugin\views\field;
 
-use Drupal\views\ResultRow;
 use Drupal\search_api\Plugin\views\field\SearchApiRenderedItem;
+use Drupal\views\ResultRow;
+use Drupal\views\Attribute\ViewsField;
 
 /**
- * Provides dynamic output for news listings.
- *
- * @ViewsField("utnews_listing_search_api")
+ * Provides a Views field handler to render a Search API item.
  */
+#[ViewsField('utnews_listing_search_api')]
 class NewsListingSearchApi extends SearchApiRenderedItem {
 
   /**
