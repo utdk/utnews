@@ -188,7 +188,10 @@ class BasicUtnewsTest extends WebDriverTestBase {
     $assert->elementTextEquals('css', '.utnews__published-wrapper', 'July 31, 2023');
     $assert->elementTextEquals('css', '.utnews__categories-wrapper', 'News category Press Releases');
     $assert->elementTextEquals('css', '.utnews__tags-wrapper', 'News tags Demo Tag 1');
-    $this->assertEquals('<p>Pellentesque tristique senectus <strong>et netus</strong> et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p><ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li><li>Aliquam tincidunt mauris eu risus.</li><li>Vestibulum auctor dapibus neque.</li></ul>', $page->find('css', '.field--name-field-utnews-body')->getHTML());
+    $actual = $page->find('css', '.field--name-field-utnews-body')->getHTML();
+    // Remove random-generated data-list-item-id values.
+    $actual_clean = preg_replace('/\sdata-list-item-id="[A-Za-z0-9]*"/', '', $actual);
+    $this->assertEquals($text, $actual_clean);
     $this->assertNotEmpty($assert->waitForElementVisible('css', '.field--name-field-utexas-media-image'), 'The news node should display an image.');
     $assert->elementTextEquals('css', '.utnews__author-information-wrapper h3', 'Demo Author 1');
     $this->assertNotEmpty($assert->waitForElementVisible('css', '.utnews__author-information-wrapper .field--name-field-utexas-media-image'));
