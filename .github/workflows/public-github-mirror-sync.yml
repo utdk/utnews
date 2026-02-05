@@ -1,7 +1,5 @@
 name: Sync to public mirror
-on:
-  worflow_dispatch
-  #[push, delete]
+on: [push, delete]
 env:
   OWNER: "utexas-utdk"
   REPO: ${{ github.event.repository.name }}
