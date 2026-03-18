@@ -165,7 +165,7 @@ class DemoContent {
     $image->setFileUri($image_metadata['filepath']);
     $image->setOwnerId(\Drupal::currentUser()->id());
     $image->setMimeType(\Drupal::service('file.mime_type.guesser')->guessMimeType($image_metadata['filepath']));
-    $image->setFileName($file_system->basename($image_metadata['filepath']));
+    $image->setFileName(basename($image_metadata['filepath']));
     $destination_dir = 'public://generated_sample';
     $file_system->prepareDirectory($destination_dir, FileSystemInterface::CREATE_DIRECTORY);
     $destination = $destination_dir . '/' . basename($image_metadata['filepath']);
