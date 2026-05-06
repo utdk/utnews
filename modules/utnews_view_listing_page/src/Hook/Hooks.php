@@ -6,7 +6,6 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Hook\Attribute\Hook;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\utnews_view_listing_page\Form\ListingPageConfig;
-use Drupal\views\ViewExecutable;
 
 /**
  * Hook implementations.

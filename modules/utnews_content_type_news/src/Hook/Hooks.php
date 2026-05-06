@@ -71,7 +71,7 @@ class Hooks {
     $config = \Drupal::service('config.factory')->getEditable($config_id);
     if (is_null($config->get('id'))) {
       \Drupal::logger('utnews_content_type_news')->notice('Standard workflow not found. Skipping...');
-      // This site does not use the standard_workflow from utdk_profile. Move on.
+      // This site does not use the standard_workflow. Move on.
       return;
     }
     \Drupal::logger('utnews_content_type_news')->notice('Standard workflow found. Updating...');
