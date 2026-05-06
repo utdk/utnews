@@ -25,17 +25,6 @@ class Hooks {
   }
 
   /**
-   * Implements hook_views_pre_render().
-   */
-  #[Hook('views_pre_render')]
-  public function viewsPreRender(ViewExecutable $view) {
-    $view_id = 'utnews_listing_page';
-    if ($view->storage->id() === $view_id) {
-      $view->element['#attached']['library'][] = 'utexas_layout_builder_styles/border-styles';
-    }
-  }
-
-  /**
    * Implements hook_preprocess_HOOK().
    */
   #[Hook('preprocess_page__news')]
