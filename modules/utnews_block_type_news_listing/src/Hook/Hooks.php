@@ -85,19 +85,4 @@ class Hooks {
     unset($definitions['views_block:utnews_listing_block-utnews_summary_image_date']);
   }
 
-  /**
-   * Implements hook_views_data_alter().
-   */
-  #[Hook('views_data_alter')]
-  public function viewsDataAlter(array &$data) {
-    $data['node']['utnews_listing'] = [
-      'title' => $this->t('News Listing dynamic view mode'),
-      'field' => [
-        'title' => $this->t('News Listing'),
-        'help' => $this->t('Render news article with configurable settings for summary, image, and date'),
-        'id' => 'utnews_listing',
-      ],
-    ];
-  }
-
 }

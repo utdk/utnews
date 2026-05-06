@@ -1,3 +1,6 @@
+## Notes
+In working on this, I discovered the `viewsDataAlter()` hook in `utnews_block_type_news_listing.views.inc` . This hook is vestigial, added during our first approach to the News listing block, but made irrelevant by changes introduced in https://github.com/utexas-utdk/utnews/pull/329 (as can be observed by the fact that the custom Views field this hook is referencing was removed in that pull request). As such, I've removed `utnews_block_type_news_listing.views.inc` as part of this task.
+
 # Acceptance criteria
 
 - [ ] Upon installation from this branch, visiting `/admin/config/workflow/workflows/manage/standard_workflow` shows the News node included as using the Standard Workflow, establishing that `Drupal\utnews_content_type_news\Hooks::addStandardWorkflow()` is working
