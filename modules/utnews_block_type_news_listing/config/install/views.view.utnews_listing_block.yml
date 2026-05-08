@@ -192,9 +192,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              utexas_content_editor: '0'
-              utexas_site_manager: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -234,8 +231,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              utexas_content_editor: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -282,8 +277,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              utexas_content_editor: '0'
             reduce: false
           is_grouped: false
           group_info:

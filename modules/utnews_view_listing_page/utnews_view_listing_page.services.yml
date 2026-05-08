@@ -1,3 +1,6 @@
+parameters:
+  utnews_view_listing_page.skip_procedural_hook_scan: true
+
 services:
   utnews_view_listing_page.page_cache_request_policy.do_not_cache_facets:
     class: Drupal\utnews_view_listing_page\PageCache\RequestPolicy\DoNotCacheFacets

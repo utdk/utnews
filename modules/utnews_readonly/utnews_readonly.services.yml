@@ -1,3 +1,6 @@
+parameters:
+  utnews_readonly.skip_procedural_hook_scan: true
+
 services:
   utnews_readonly.route_subscriber:
     class: Drupal\utnews_readonly\Routing\RouteSubscriber
