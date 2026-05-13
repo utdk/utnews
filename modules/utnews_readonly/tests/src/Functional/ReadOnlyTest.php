@@ -2,8 +2,8 @@
 
 namespace Drupal\Tests\utnews_readonly\Functional;
 
-use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use Drupal\Tests\BrowserTestBase;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
  * Verifies add-on specific Field UI pages are read-only.
