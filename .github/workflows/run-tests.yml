@@ -65,3 +65,4 @@ jobs:
         run: |
           cd utdk-project
           lando test web/modules/custom/$REPO/tests
+          lando test web/modules/custom/$REPO/modules/utnews_readonly/tests
