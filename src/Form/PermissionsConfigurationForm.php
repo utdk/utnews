@@ -87,8 +87,7 @@ class PermissionsConfigurationForm extends ConfigFormBase {
     }
 
     $form['intro']['#markup'] = $this->t('<h3>Assigning permissions</h3><p>Use this form to assign permissions associated with the News add-on to user role(s) within the site. Notes:</p> <ol><li>First review existing permissions on the role(s) you intend to modify by visiting the site\'s <a href="/admin/people/permissions">permissions overview page</a> (not all accounts have access).</li><li>Only already <em>existing roles</em> in the system may have permissions assigned through this form. The <em>anonymous</em> and <em>authenticated</em> roles are disabled as a security precaution.</li>
-    <li>These permissions will be <em>added to the existing permissions</em> on the selected role(s). No permissions will be removed.</li>
-    <li>The News add-on consists of multiple sub-modules (see <a href="https://drupalkit.its.utexas.edu/docs/addons/index.html#news-add-on">https://drupalkit.its.utexas.edu/docs/addons/index.html#news-add-on</a>). This function will only add permissions defined by <em>enabled</em> sub-modules.</li></ol></p>');
+    <li>These permissions will be <em>added to the existing permissions</em> on the selected role(s). No permissions will be removed.</li></ol></p>');
 
     $form['assign_manager_permissions'] = [
       '#type' => 'select',
