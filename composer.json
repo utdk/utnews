@@ -15,7 +15,7 @@
     "source": "https://github.austin.utexas.edu/eis1-wcs/utnews"
   },
   "require": {
-    "drupal/facets": "3.0.2",
+    "drupal/facets": "3.0.3",
     "drupal/search_api": "1.40.0",
     "utexas/utdk_profile": "^3.29.0 || dev-develop"
   },
