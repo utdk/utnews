@@ -64,4 +64,4 @@ jobs:
       - name: Run tests
         run: |
           cd utdk-project
-          lando test web/modules/custom/$REPO/tests
+          lando test web/modules/custom/$REPO

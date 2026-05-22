@@ -13,12 +13,14 @@ use Drupal\Tests\node\Traits\NodeCreationTrait;
 use Drupal\Tests\TestFileCreationTrait;
 use Drupal\utexas\Permissions as UtexasPermissions;
 use Drupal\utnews\Permissions as UtnewsPermissions;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
  * Test all aspects of News CRUD functionality.
  *
  * @group utexas
  */
+#[RunTestsInSeparateProcesses]
 class BasicUtnewsTest extends WebDriverTestBase {
 
   use TestFileCreationTrait;

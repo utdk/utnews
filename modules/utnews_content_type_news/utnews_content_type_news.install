@@ -9,6 +9,7 @@ use Drupal\block\Entity\Block;
 use Drupal\metatag\Entity\MetatagDefaults;
 use Drupal\pathauto\Entity\PathautoPattern;
 use Drupal\utnews\Permissions;
+use Drupal\utnews_content_type_news\Hook\Hooks;
 use Drupal\utnews_content_type_news\NewsContentTypeHelper;
 
 /**
@@ -27,8 +28,7 @@ function utnews_content_type_news_install() {
   Permissions::assignPermissions('editor', 'utexas_content_editor');
   Permissions::assignPermissions('manager', 'utexas_site_manager');
 
-  // This function is defined in the utnews_content_type_news.module file.
-  _utnews_content_type_news_add_standard_workflow();
+  Hooks::addStandardWorkflow();
 }
 
 /**
@@ -302,16 +302,16 @@ function utnews_content_type_news_update_8111() {
  * Invalidate existing render cache (#230).
  */
 function utnews_content_type_news_update_8112() {
+  /** @var \Drupal\Core\Cache\CacheBackendInterface $render_cache */
   $render_cache = \Drupal::service('cache.render');
-  $render_cache->invalidateAll();
+  $render_cache->deleteAll();
 }
 
 /**
  * Use "Standard workflow" on News nodes #271.
  */
 function utnews_content_type_news_update_8113() {
-  // This function is defined in the utnews_content_type_news.module file.
-  _utnews_content_type_news_add_standard_workflow();
+  Hooks::addStandardWorkflow();
 }
 
 /**
