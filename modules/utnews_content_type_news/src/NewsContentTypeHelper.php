@@ -269,7 +269,7 @@ class NewsContentTypeHelper {
    */
   public static function addSocialSharing() {
     // Set Social Sharing links to display on News articles.
-    if ($block = Block::load('addtoany_utexas')) {
+    if ($block = Block::load('speedway_addtoany_utexas')) {
       $block->enable();
       $visibility = $block->getVisibility();
       if (isset($visibility['entity_bundle:node']['bundles'])) {
