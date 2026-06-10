@@ -54,7 +54,7 @@ function utnews_content_type_news_uninstall() {
   // Delete default metatags.
   _utnews_delete_metatags();
   // Remove social sharing block from Block UI.
-  if ($block = Block::load('addtoany_utnews')) {
+  if ($block = Block::load('speedway_addtoany_utexas')) {
     $block->delete();
   }
 }
